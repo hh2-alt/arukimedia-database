@@ -1,0 +1,524 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="robots" content="index,follow">
+  <meta name="description"
+        content="大正大学「社会の探究Ⅲ」で参照する、あるきめでぃあ／すがもプロジェクトの過去企画データベース。">
+
+  <title>
+    あるきめでぃあ／すがもプロジェクト 過去企画データベース
+  </title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Yu Gothic",
+        Meiryo,
+        sans-serif;
+      line-height: 1.75;
+      color: #222;
+      background: #f6f7f9;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .wrap {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 28px 20px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+      line-height: 1.4;
+    }
+
+    .lead {
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .notice {
+      padding: 14px 16px;
+      background: #f0f1f3;
+      border-left: 4px solid #555;
+      font-size: 0.95rem;
+    }
+
+    .count {
+      margin-top: 14px;
+      color: #555;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 10px;
+
+      position: sticky;
+      top: 0;
+      z-index: 10;
+
+      padding: 12px 0;
+      background: rgba(246,247,249,0.96);
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      font: inherit;
+    }
+
+    #resultCount {
+      grid-column: 1 / -1;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .record {
+      margin-bottom: 16px;
+      padding: 22px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+    }
+
+    .record h2 {
+      margin: 8px 0 14px;
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .meta span {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #eef0f3;
+      color: #555;
+      font-size: 0.84rem;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      margin: 16px 0 4px;
+      font-size: 1rem;
+    }
+
+    .tags {
+      margin-top: 14px;
+      padding: 12px 0;
+      border-top: 1px solid #e2e2e2;
+      border-bottom: 1px solid #e2e2e2;
+    }
+
+    .tag-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 10px;
+      margin: 5px 0;
+    }
+
+    .tag-label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .tag-value {
+      white-space: normal;
+    }
+
+    .source {
+      margin-top: 14px;
+    }
+
+    .url {
+      color: #666;
+      font-size: 0.85rem;
+      overflow-wrap: anywhere;
+      white-space: pre-line;
+    }
+
+    .note {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    #noResults {
+      display: none;
+      padding: 30px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      color: #666;
+    }
+
+    footer {
+      color: #666;
+      font-size: 0.85rem;
+      padding-bottom: 40px;
+    }
+
+    @media (max-width: 700px) {
+      .controls,
+      .details,
+      .tag-row {
+        grid-template-columns: 1fr;
+      }
+
+      #resultCount {
+        grid-column: 1;
+      }
+
+      .record {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+
+    <h1>
+      あるきめでぃあ／すがもプロジェクト
+      過去企画データベース
+    </h1>
+
+    <p class="lead">
+      大正大学「社会の探究Ⅲ」で、
+      過去企画を比較・参照するための公開データベースです。
+      企画名、年度、概要、地域資源、対象者、価値、
+      体験・交流、企画形式、元記事URLを掲載しています。
+    </p>
+
+    <div class="notice">
+      <strong>参照上の注意：</strong>
+      このデータベースは、過去企画を比較するための参考資料です。
+      掲載範囲だけから
+      「前例がない」「初めてである」
+      と断定することはできません。
+      過去企画をそのまま模倣するためではなく、
+      「共通しているところ」
+      「違っているところ」
+      「自分たちのフィールドワークから生まれたところ」
+      を考えるために使用してください。
+    </div>
+
+    <p class="count">
+      収録件数：
+      <strong>{{ site.data.projects | size }}</strong>件
+    </p>
+
+  </div>
+</header>
+
+
+<main class="wrap">
+
+  <div class="controls">
+
+    <input
+      id="searchBox"
+      type="search"
+      placeholder="企画名・銭湯・地域交流・対象者などで検索"
+    >
+
+    <select id="yearFilter">
+      <option value="">すべての年度</option>
+      <option value="2026">2026年度</option>
+      <option value="2025">2025年度</option>
+      <option value="2024">2024年度</option>
+      <option value="2023">2023年度</option>
+      <option value="2022">2022年度</option>
+      <option value="2021">2021年度</option>
+      <option value="2020">2020年度</option>
+    </select>
+
+    <div id="resultCount">
+      {{ site.data.projects | size }}件を表示
+    </div>
+
+  </div>
+
+
+  <section id="records">
+
+  {% assign projects = site.data.projects | sort: "DB_ID" | reverse %}
+
+  {% for p in projects %}
+
+    <article
+      class="record"
+      data-year="{{ p['年度'] | escape }}"
+    >
+
+      <div class="meta">
+        <span>{{ p["年度"] }}年度</span>
+        <span>DB_ID {{ p["DB_ID"] }}</span>
+      </div>
+
+
+      <h2>
+        {{ p["整理版タイトル"] }}
+      </h2>
+
+
+      <div class="details">
+
+        <div>
+          <strong>公開時期</strong><br>
+          {{ p["公開時期"] }}
+        </div>
+
+        <div>
+          <strong>URL確認状況</strong><br>
+          {{ p["URL確認状況"] }}
+        </div>
+
+      </div>
+
+
+      <h3>概要</h3>
+
+      <p>
+        {{ p["概要"] }}
+      </p>
+
+
+      <div class="tags">
+
+        <div class="tag-row">
+          <div class="tag-label">地域資源</div>
+          <div class="tag-value">
+            {{ p["地域資源タグ"] }}
+          </div>
+        </div>
+
+        <div class="tag-row">
+          <div class="tag-label">対象者</div>
+          <div class="tag-value">
+            {{ p["対象者タグ"] }}
+          </div>
+        </div>
+
+        <div class="tag-row">
+          <div class="tag-label">価値</div>
+          <div class="tag-value">
+            {{ p["価値タグ"] }}
+          </div>
+        </div>
+
+        <div class="tag-row">
+          <div class="tag-label">体験・交流</div>
+          <div class="tag-value">
+            {{ p["体験・交流タグ"] }}
+          </div>
+        </div>
+
+        <div class="tag-row">
+          <div class="tag-label">企画形式</div>
+          <div class="tag-value">
+            {{ p["企画形式タグ"] }}
+          </div>
+        </div>
+
+      </div>
+
+
+      {% if p["備考"] != "" %}
+
+      <p class="note">
+        <strong>備考：</strong>
+        {{ p["備考"] }}
+      </p>
+
+      {% endif %}
+
+
+      <div class="source">
+
+        <strong>元記事URL</strong>
+
+        <div class="url">
+          {{ p["元記事URL"] }}
+        </div>
+
+        {% if p["URL確認状況"] == "確認済み" %}
+
+          {% if p["元記事URL"] contains "https://" %}
+
+          <p>
+            <a
+              href="{{ p['元記事URL'] | strip }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              元記事を開く
+            </a>
+          </p>
+
+          {% endif %}
+
+        {% endif %}
+
+      </div>
+
+    </article>
+
+  {% endfor %}
+
+  </section>
+
+
+  <div id="noResults">
+    該当する企画がありません。
+  </div>
+
+</main>
+
+
+<footer class="wrap">
+
+  <p>
+    あるきめでぃあ／すがもプロジェクト
+    過去企画データベース
+  </p>
+
+</footer>
+
+
+<script>
+
+const searchBox =
+  document.getElementById("searchBox");
+
+const yearFilter =
+  document.getElementById("yearFilter");
+
+const records =
+  Array.from(
+    document.querySelectorAll(".record")
+  );
+
+const resultCount =
+  document.getElementById("resultCount");
+
+const noResults =
+  document.getElementById("noResults");
+
+
+function normalizeText(text) {
+
+  return (text || "")
+    .toLowerCase()
+    .normalize("NFKC");
+
+}
+
+
+function filterRecords() {
+
+  const query =
+    normalizeText(searchBox.value.trim());
+
+  const terms =
+    query.split(/\s+/).filter(Boolean);
+
+  const selectedYear =
+    yearFilter.value;
+
+  let visible = 0;
+
+
+  records.forEach(record => {
+
+    const text =
+      normalizeText(record.textContent);
+
+    const yearOK =
+      !selectedYear ||
+      record.dataset.year === selectedYear;
+
+    const queryOK =
+      terms.every(term =>
+        text.includes(term)
+      );
+
+    const show =
+      yearOK && queryOK;
+
+
+    record.style.display =
+      show ? "" : "none";
+
+
+    if (show) {
+      visible++;
+    }
+
+  });
+
+
+  resultCount.textContent =
+    visible + "件を表示";
+
+
+  noResults.style.display =
+    visible === 0
+      ? "block"
+      : "none";
+
+}
+
+
+searchBox.addEventListener(
+  "input",
+  filterRecords
+);
+
+
+yearFilter.addEventListener(
+  "change",
+  filterRecords
+);
+
+</script>
+
+</body>
+</html>
