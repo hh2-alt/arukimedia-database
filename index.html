@@ -1,25 +1,35 @@
----
+   ---
 layout: null
 ---
 
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>あるきめでぃあ／すがもプロジェクト 過去企画データベース</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>
+    あるきめでぃあ／すがもプロジェクト 過去企画データベース
+  </title>
 
   <meta name="description"
-        content="大正大学すがもプロジェクト・あるきめでぃあの過去企画データベース">
+        content="大正大学「すがもプロジェクト」および学生メディア「あるきめでぃあ」に掲載された過去企画・活動を整理したデータベースです。">
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     body {
+
       margin: 0;
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -28,186 +38,578 @@ layout: null
         "Yu Gothic",
         "Meiryo",
         sans-serif;
+
       background: #f5f6f8;
+
       color: #222;
+
       line-height: 1.75;
+
     }
+
+
+    /*
+    ==============================
+    ヘッダー
+    ==============================
+    */
 
     header {
+
       background: #ffffff;
-      border-bottom: 1px solid #ddd;
+
+      border-bottom: 1px solid #e1e4e8;
+
     }
+
 
     .header-inner {
+
       max-width: 1100px;
+
       margin: 0 auto;
+
       padding: 38px 24px 28px;
+
     }
+
 
     h1 {
-      margin: 0 0 12px;
+
+      margin: 0 0 14px;
+
       font-size: 2rem;
+
       line-height: 1.4;
+
+      letter-spacing: 0.02em;
+
     }
+
 
     .intro {
+
       margin: 0;
+
       color: #555;
-      max-width: 850px;
+
+      max-width: 900px;
+
+      font-size: 1rem;
+
     }
+
 
     .count {
-      margin-top: 12px;
-      font-size: 0.95rem;
+
+      margin-top: 14px;
+
       color: #666;
+
+      font-size: 0.95rem;
+
     }
+
+
+
+    /*
+    ==============================
+    検索・絞り込み
+    ==============================
+    */
 
     .tools {
+
       max-width: 1100px;
+
       margin: 24px auto 0;
+
       padding: 0 24px;
+
     }
 
+
     .tool-box {
-      background: #fff;
-      padding: 18px;
-      border: 1px solid #ddd;
+
+      background: #ffffff;
+
+      border: 1px solid #e0e0e0;
+
       border-radius: 10px;
+
+      padding: 18px;
+
       display: flex;
+
       gap: 12px;
+
       flex-wrap: wrap;
+
+      align-items: center;
+
     }
+
 
     input,
     select {
+
+      font-family: inherit;
+
       font-size: 1rem;
-      padding: 10px 12px;
+
+      padding: 11px 13px;
+
       border: 1px solid #bbb;
-      border-radius: 6px;
+
+      border-radius: 7px;
+
       background: #fff;
+
     }
+
 
     input {
+
       flex: 1;
-      min-width: 260px;
+
+      min-width: 280px;
+
     }
+
+
+    select {
+
+      min-width: 170px;
+
+    }
+
+
+    input:focus,
+    select:focus {
+
+      outline: 2px solid #777;
+
+      outline-offset: 1px;
+
+    }
+
+
+    .result-count {
+
+      max-width: 1100px;
+
+      margin: 14px auto 0;
+
+      padding: 0 24px;
+
+      color: #666;
+
+      font-size: 0.9rem;
+
+    }
+
+
+
+    /*
+    ==============================
+    メイン
+    ==============================
+    */
 
     main {
+
       max-width: 1100px;
-      margin: 24px auto 60px;
+
+      margin: 20px auto 60px;
+
       padding: 0 24px;
+
     }
+
+
+
+    /*
+    ==============================
+    企画カード
+    ==============================
+    */
 
     .project-card {
-      background: #fff;
-      border: 1px solid #ddd;
+
+      background: #ffffff;
+
+      border: 1px solid #dedede;
+
       border-radius: 12px;
-      padding: 24px 26px;
+
+      padding: 25px 27px;
+
       margin-bottom: 22px;
-      box-shadow: 0 2px 7px rgba(0,0,0,0.04);
+
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+
     }
+
 
     .meta-top {
+
       display: flex;
+
       gap: 8px;
+
       flex-wrap: wrap;
-      margin-bottom: 10px;
+
+      margin-bottom: 11px;
+
     }
+
 
     .badge {
+
       display: inline-block;
-      background: #eef1f4;
-      padding: 3px 9px;
+
+      padding: 4px 10px;
+
       border-radius: 999px;
-      font-size: 0.85rem;
+
+      background: #eef1f4;
+
       color: #555;
+
+      font-size: 0.84rem;
+
+      line-height: 1.5;
+
     }
+
 
     .project-title {
-      margin: 0 0 18px;
-      font-size: 1.35rem;
+
+      margin: 0 0 19px;
+
+      font-size: 1.38rem;
+
       line-height: 1.5;
+
+      color: #1c1c1c;
+
     }
 
-    .section-label {
-      font-weight: 700;
-      margin-bottom: 3px;
-    }
+
+
+    /*
+    ==============================
+    概要
+    ==============================
+    */
 
     .summary {
-      margin-bottom: 20px;
+
+      margin-bottom: 18px;
+
     }
+
+
+    .section-label {
+
+      font-weight: 700;
+
+      color: #333;
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .summary p {
+
+      margin: 4px 0 0;
+
+    }
+
+
+
+    /*
+    ==============================
+    元記事
+    ==============================
+    */
 
     .source {
-      padding-top: 16px;
-      border-top: 1px solid #eee;
+
       margin-top: 18px;
+
+      padding-top: 15px;
+
+      border-top: 1px solid #eee;
+
     }
 
-    .source a {
-      color: #0056b3;
-      word-break: break-all;
+
+    .article-link {
+
+      display: inline-block;
+
+      margin-top: 5px;
+
+      padding: 7px 13px;
+
+      border-radius: 6px;
+
+      background: #f0f3f6;
+
+      color: #174b7a;
+
+      text-decoration: none;
+
+      font-weight: 600;
+
     }
+
+
+    .article-link:hover {
+
+      background: #e4e9ee;
+
+      text-decoration: underline;
+
+    }
+
+
+    .url-unconfirmed {
+
+      display: inline-block;
+
+      margin-top: 5px;
+
+      color: #777;
+
+    }
+
+
+
+    /*
+    ==============================
+    詳細情報
+    ==============================
+    */
+
+    .details {
+
+      margin-top: 20px;
+
+      padding-top: 14px;
+
+      border-top: 1px solid #eee;
+
+    }
+
+
+    .details summary {
+
+      cursor: pointer;
+
+      color: #555;
+
+      font-weight: 600;
+
+      font-size: 0.95rem;
+
+      user-select: none;
+
+    }
+
+
+    .details summary:hover {
+
+      color: #111;
+
+    }
+
 
     .tags {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid #eee;
+
+      margin-top: 17px;
+
       display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 8px 16px;
-      font-size: 0.95rem;
+
+      grid-template-columns: 125px 1fr;
+
+      gap: 9px 18px;
+
+      font-size: 0.94rem;
+
     }
+
 
     .tag-label {
-      font-weight: 700;
+
       color: #555;
+
+      font-weight: 700;
+
     }
+
 
     .tag-value {
+
       color: #444;
+
+      word-break: break-word;
+
     }
 
-    .hidden {
-      display: none;
+
+    .note {
+
+      margin-top: 15px;
+
+      padding-top: 12px;
+
+      border-top: 1px dashed #ddd;
+
+      color: #666;
+
+      font-size: 0.9rem;
+
     }
+
+
+
+    /*
+    ==============================
+    検索時
+    ==============================
+    */
+
+    .hidden {
+
+      display: none;
+
+    }
+
+
+    .no-result {
+
+      display: none;
+
+      background: white;
+
+      border: 1px solid #ddd;
+
+      border-radius: 10px;
+
+      padding: 30px;
+
+      text-align: center;
+
+      color: #666;
+
+    }
+
+
+
+    /*
+    ==============================
+    スマートフォン
+    ==============================
+    */
 
     @media (max-width: 700px) {
 
+
       .header-inner,
       .tools,
+      .result-count,
       main {
+
         padding-left: 16px;
+
         padding-right: 16px;
+
       }
+
 
       h1 {
+
         font-size: 1.55rem;
+
       }
+
+
+      .intro {
+
+        font-size: 0.94rem;
+
+      }
+
+
+      .tool-box {
+
+        display: block;
+
+      }
+
+
+      input,
+      select {
+
+        width: 100%;
+
+        margin-bottom: 10px;
+
+      }
+
 
       .project-card {
+
         padding: 20px;
+
       }
+
 
       .project-title {
-        font-size: 1.2rem;
+
+        font-size: 1.18rem;
+
       }
+
 
       .tags {
+
         grid-template-columns: 1fr;
+
         gap: 2px;
+
       }
 
-      .tag-value {
-        margin-bottom: 9px;
+
+      .tag-label {
+
+        margin-top: 10px;
+
       }
+
+
+      .tag-value {
+
+        margin-bottom: 2px;
+
+      }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <header>
+
   <div class="header-inner">
 
     <h1>
@@ -215,18 +617,30 @@ layout: null
       過去企画データベース
     </h1>
 
+
     <p class="intro">
-      大正大学「すがもプロジェクト」および学生メディア
-      「あるきめでぃあ」に掲載された過去の企画・活動を整理したデータベースです。
+
+      大正大学「すがもプロジェクト」および
+      学生メディア「あるきめでぃあ」に掲載された
+      過去の企画・活動を整理したデータベースです。
+
     </p>
 
+
     <div class="count">
-      収録件数：{{ site.data.projects | size }}件
+
+      収録件数：
+      <strong>{{ site.data.projects | size }}</strong>件
+
     </div>
 
   </div>
+
 </header>
 
+
+
+<!-- 検索・絞り込み -->
 
 <div class="tools">
 
@@ -236,17 +650,47 @@ layout: null
       type="search"
       id="searchBox"
       placeholder="キーワードで検索（例：観光、商店街、銭湯、子ども）"
+      aria-label="キーワード検索"
     >
 
-    <select id="yearFilter">
-      <option value="">すべての年度</option>
-      <option value="2026">2026年度</option>
-      <option value="2025">2025年度</option>
-      <option value="2024">2024年度</option>
-      <option value="2023">2023年度</option>
-      <option value="2022">2022年度</option>
-      <option value="2021">2021年度</option>
-      <option value="2020">2020年度</option>
+
+    <select
+      id="yearFilter"
+      aria-label="年度で絞り込み"
+    >
+
+      <option value="">
+        すべての年度
+      </option>
+
+      <option value="2026">
+        2026年度
+      </option>
+
+      <option value="2025">
+        2025年度
+      </option>
+
+      <option value="2024">
+        2024年度
+      </option>
+
+      <option value="2023">
+        2023年度
+      </option>
+
+      <option value="2022">
+        2022年度
+      </option>
+
+      <option value="2021">
+        2021年度
+      </option>
+
+      <option value="2020">
+        2020年度
+      </option>
+
     </select>
 
   </div>
@@ -254,39 +698,75 @@ layout: null
 </div>
 
 
+<div
+  class="result-count"
+  id="resultCount"
+>
+</div>
+
+
+
 <main>
+
 
 {% for project in site.data.projects %}
 
+
 <article
   class="project-card"
-  id="db-{{ project.DB_ID }}"
-  data-year="{{ project.年度 }}"
+  id="db-{{ project['DB_ID'] }}"
+  data-year="{{ project['年度'] }}"
 >
+
+
+  <!-- DB ID・年度・公開時期 -->
 
   <div class="meta-top">
 
-    <span class="badge">
-      DB_ID：{{ project.DB_ID }}
-    </span>
 
     <span class="badge">
-      {{ project.年度 }}年度
+
+      DB_ID：
+      {{ project['DB_ID'] }}
+
     </span>
 
-    {% if project.公開時期 and project.公開時期 != "" %}
+
     <span class="badge">
-      公開：{{ project.公開時期 }}
+
+      {{ project['年度'] }}年度
+
     </span>
+
+
+    {% if project['公開時期']
+       and project['公開時期'] != "" %}
+
+    <span class="badge">
+
+      公開：
+      {{ project['公開時期'] }}
+
+    </span>
+
     {% endif %}
+
 
   </div>
 
 
+
+  <!-- タイトル -->
+
   <h2 class="project-title">
-    {{ project.整理版タイトル }}
+
+    {{ project['整理版タイトル'] }}
+
   </h2>
 
+
+
+  <!-- 概要 -->
 
   <div class="summary">
 
@@ -294,123 +774,313 @@ layout: null
       概要
     </div>
 
-    <div>
-      {{ project.概要 }}
-    </div>
+    <p>
+      {{ project['概要'] }}
+    </p>
 
   </div>
 
 
+
+  <!-- 元記事 -->
+
   <div class="source">
+
 
     <div class="section-label">
       元記事
     </div>
 
-    {% if project.元記事URL and project.元記事URL != "" %}
+
+    {% if project['元記事URL']
+       and project['元記事URL'] != "" %}
+
 
       <a
-        href="{{ project.元記事URL }}"
+        class="article-link"
+        href="{{ project['元記事URL'] }}"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
       >
-        {{ project.元記事URL }}
+
+        元記事を読む
+
       </a>
+
 
     {% else %}
 
-      確認できません
+
+      <span class="url-unconfirmed">
+
+        元記事URL未確認
+
+      </span>
+
 
     {% endif %}
 
-  </div>
-
-
-  <div class="tags">
-
-    <div class="tag-label">地域資源</div>
-    <div class="tag-value">
-      {{ project.地域資源タグ }}
-    </div>
-
-    <div class="tag-label">対象者</div>
-    <div class="tag-value">
-      {{ project.対象者タグ }}
-    </div>
-
-    <div class="tag-label">価値</div>
-    <div class="tag-value">
-      {{ project.価値タグ }}
-    </div>
-
-    <div class="tag-label">体験・交流</div>
-    <div class="tag-value">
-      {{ project.体験・交流タグ }}
-    </div>
-
-    <div class="tag-label">企画形式</div>
-    <div class="tag-value">
-      {{ project.企画形式タグ }}
-    </div>
 
   </div>
+
+
+
+  <!-- タグ・詳細 -->
+
+  <details class="details">
+
+
+    <summary>
+
+      タグ・詳細情報を見る
+
+    </summary>
+
+
+    <div class="tags">
+
+
+      <div class="tag-label">
+        地域資源
+      </div>
+
+      <div class="tag-value">
+        {{ project['地域資源タグ'] }}
+      </div>
+
+
+
+      <div class="tag-label">
+        対象者
+      </div>
+
+      <div class="tag-value">
+        {{ project['対象者タグ'] }}
+      </div>
+
+
+
+      <div class="tag-label">
+        価値
+      </div>
+
+      <div class="tag-value">
+        {{ project['価値タグ'] }}
+      </div>
+
+
+
+      <div class="tag-label">
+        体験・交流
+      </div>
+
+      <div class="tag-value">
+        {{ project['体験・交流タグ'] }}
+      </div>
+
+
+
+      <div class="tag-label">
+        企画形式
+      </div>
+
+      <div class="tag-value">
+        {{ project['企画形式タグ'] }}
+      </div>
+
+
+
+      <div class="tag-label">
+        URL確認状況
+      </div>
+
+      <div class="tag-value">
+        {{ project['URL確認状況'] }}
+      </div>
+
+
+    </div>
+
+
+
+    {% if project['備考']
+       and project['備考'] != "" %}
+
+    <div class="note">
+
+      <strong>備考：</strong>
+
+      {{ project['備考'] }}
+
+    </div>
+
+    {% endif %}
+
+
+  </details>
+
 
 </article>
 
+
 {% endfor %}
+
+
+
+<div
+  id="noResult"
+  class="no-result"
+>
+
+  条件に一致する企画は見つかりませんでした。
+
+</div>
+
 
 </main>
 
 
+
 <script>
 
-const searchBox = document.getElementById("searchBox");
-const yearFilter = document.getElementById("yearFilter");
-const cards = document.querySelectorAll(".project-card");
+  /*
+  ==============================
+  検索・年度絞り込み
+  ==============================
+  */
 
-function filterProjects() {
 
-  const keyword =
-    searchBox.value.toLowerCase().trim();
+  const searchBox =
+    document.getElementById("searchBox");
 
-  const year =
-    yearFilter.value;
 
-  cards.forEach(card => {
+  const yearFilter =
+    document.getElementById("yearFilter");
 
-    const text =
-      card.innerText.toLowerCase();
 
-    const cardYear =
-      card.dataset.year;
+  const cards =
+    document.querySelectorAll(".project-card");
 
-    const keywordMatch =
-      !keyword || text.includes(keyword);
 
-    const yearMatch =
-      !year || cardYear === year;
+  const resultCount =
+    document.getElementById("resultCount");
 
-    if (keywordMatch && yearMatch) {
-      card.classList.remove("hidden");
+
+  const noResult =
+    document.getElementById("noResult");
+
+
+
+  function filterProjects() {
+
+
+    const keyword =
+      searchBox.value
+        .toLowerCase()
+        .trim();
+
+
+    const year =
+      yearFilter.value;
+
+
+    let visibleCount = 0;
+
+
+
+    cards.forEach(card => {
+
+
+      const text =
+        card.textContent
+          .toLowerCase();
+
+
+      const cardYear =
+        card.dataset.year;
+
+
+      const keywordMatch =
+        keyword === "" ||
+        text.includes(keyword);
+
+
+      const yearMatch =
+        year === "" ||
+        cardYear === year;
+
+
+
+      if (keywordMatch && yearMatch) {
+
+
+        card.classList.remove("hidden");
+
+        visibleCount++;
+
+
+      } else {
+
+
+        card.classList.add("hidden");
+
+
+      }
+
+
+    });
+
+
+
+    resultCount.textContent =
+      "表示件数：" +
+      visibleCount +
+      "件";
+
+
+    if (visibleCount === 0) {
+
+
+      noResult.style.display =
+        "block";
+
+
     } else {
-      card.classList.add("hidden");
+
+
+      noResult.style.display =
+        "none";
+
+
     }
 
-  });
 
-}
+  }
 
-searchBox.addEventListener(
-  "input",
-  filterProjects
-);
 
-yearFilter.addEventListener(
-  "change",
-  filterProjects
-);
+
+  searchBox.addEventListener(
+    "input",
+    filterProjects
+  );
+
+
+  yearFilter.addEventListener(
+    "change",
+    filterProjects
+  );
+
+
+  /*
+  初回表示時にも件数を表示
+  */
+
+  filterProjects();
+
 
 </script>
 
+
 </body>
+
 </html>
