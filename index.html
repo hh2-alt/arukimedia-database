@@ -1,4 +1,4 @@
-   ---
+---
 layout: null
 ---
 
@@ -6,15 +6,12 @@ layout: null
 <html lang="ja">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-  <title>
-    あるきめでぃあ／すがもプロジェクト 過去企画データベース
-  </title>
+  <title>あるきめでぃあ／すがもプロジェクト 過去企画データベース</title>
 
   <meta name="description"
         content="大正大学「すがもプロジェクト」および学生メディア「あるきめでぃあ」に掲載された過去企画・活動を整理したデータベースです。">
@@ -25,583 +22,355 @@ layout: null
       box-sizing: border-box;
     }
 
-
     body {
-
       margin: 0;
-
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         "Hiragino Kaku Gothic ProN",
         "Yu Gothic",
-        "Meiryo",
+        Meiryo,
         sans-serif;
 
-      background: #f5f6f8;
-
       color: #222;
-
-      line-height: 1.75;
-
+      background: #f5f6f8;
+      line-height: 1.6;
     }
 
 
-    /*
-    ==============================
-    ヘッダー
-    ==============================
-    */
+    /* =========================
+       ヘッダー
+       ========================= */
 
     header {
-
-      background: #ffffff;
-
-      border-bottom: 1px solid #e1e4e8;
-
+      background: #fff;
+      border-bottom: 1px solid #ddd;
     }
-
 
     .header-inner {
-
-      max-width: 1100px;
-
+      max-width: 1320px;
       margin: 0 auto;
-
-      padding: 38px 24px 28px;
-
+      padding: 30px 24px 24px;
     }
-
 
     h1 {
-
-      margin: 0 0 14px;
-
-      font-size: 2rem;
-
+      margin: 0 0 10px;
+      font-size: 1.9rem;
       line-height: 1.4;
-
-      letter-spacing: 0.02em;
-
     }
 
-
-    .intro {
-
+    .description {
       margin: 0;
-
-      color: #555;
-
-      max-width: 900px;
-
-      font-size: 1rem;
-
-    }
-
-
-    .count {
-
-      margin-top: 14px;
-
       color: #666;
-
       font-size: 0.95rem;
+    }
 
+    .total-count {
+      margin-top: 12px;
+      color: #666;
+      font-size: 0.9rem;
     }
 
 
+    /* =========================
+       検索・絞り込み
+       ========================= */
 
-    /*
-    ==============================
-    検索・絞り込み
-    ==============================
-    */
-
-    .tools {
-
-      max-width: 1100px;
-
-      margin: 24px auto 0;
-
+    .filter-area {
+      max-width: 1320px;
+      margin: 22px auto 14px;
       padding: 0 24px;
-
     }
 
-
-    .tool-box {
-
-      background: #ffffff;
-
-      border: 1px solid #e0e0e0;
-
-      border-radius: 10px;
-
+    .filter-panel {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
       padding: 18px;
-
-      display: flex;
-
-      gap: 12px;
-
-      flex-wrap: wrap;
-
-      align-items: center;
-
     }
 
+    .search-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    #searchBox {
+      flex: 1;
+    }
+
+    input,
+    select,
+    button {
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
 
     input,
     select {
-
-      font-family: inherit;
-
-      font-size: 1rem;
-
-      padding: 11px 13px;
-
       border: 1px solid #bbb;
-
-      border-radius: 7px;
-
+      border-radius: 5px;
       background: #fff;
-
+      padding: 10px 11px;
     }
-
-
-    input {
-
-      flex: 1;
-
-      min-width: 280px;
-
-    }
-
-
-    select {
-
-      min-width: 170px;
-
-    }
-
 
     input:focus,
     select:focus {
-
       outline: 2px solid #777;
-
       outline-offset: 1px;
-
     }
 
-
-    .result-count {
-
-      max-width: 1100px;
-
-      margin: 14px auto 0;
-
-      padding: 0 24px;
-
-      color: #666;
-
-      font-size: 0.9rem;
-
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 10px;
     }
 
-
-
-    /*
-    ==============================
-    メイン
-    ==============================
-    */
-
-    main {
-
-      max-width: 1100px;
-
-      margin: 20px auto 60px;
-
-      padding: 0 24px;
-
-    }
-
-
-
-    /*
-    ==============================
-    企画カード
-    ==============================
-    */
-
-    .project-card {
-
-      background: #ffffff;
-
-      border: 1px solid #dedede;
-
-      border-radius: 12px;
-
-      padding: 25px 27px;
-
-      margin-bottom: 22px;
-
-      box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.04);
-
-    }
-
-
-    .meta-top {
-
-      display: flex;
-
-      gap: 8px;
-
-      flex-wrap: wrap;
-
-      margin-bottom: 11px;
-
-    }
-
-
-    .badge {
-
-      display: inline-block;
-
-      padding: 4px 10px;
-
-      border-radius: 999px;
-
-      background: #eef1f4;
-
-      color: #555;
-
-      font-size: 0.84rem;
-
-      line-height: 1.5;
-
-    }
-
-
-    .project-title {
-
-      margin: 0 0 19px;
-
-      font-size: 1.38rem;
-
-      line-height: 1.5;
-
-      color: #1c1c1c;
-
-    }
-
-
-
-    /*
-    ==============================
-    概要
-    ==============================
-    */
-
-    .summary {
-
-      margin-bottom: 18px;
-
-    }
-
-
-    .section-label {
-
-      font-weight: 700;
-
-      color: #333;
-
+    .filter-label {
+      display: block;
       margin-bottom: 4px;
-
+      font-size: 0.78rem;
+      color: #666;
+      font-weight: 600;
     }
 
-
-    .summary p {
-
-      margin: 4px 0 0;
-
+    .filter-item select {
+      width: 100%;
     }
 
-
-
-    /*
-    ==============================
-    元記事
-    ==============================
-    */
-
-    .source {
-
-      margin-top: 18px;
-
-      padding-top: 15px;
-
+    .filter-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      padding-top: 13px;
       border-top: 1px solid #eee;
-
     }
 
+    #resultInfo {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    #clearFilters {
+      border: 1px solid #bbb;
+      background: #fff;
+      border-radius: 5px;
+      padding: 8px 14px;
+      cursor: pointer;
+      color: #444;
+    }
+
+    #clearFilters:hover {
+      background: #f0f1f2;
+    }
+
+
+    /* =========================
+       データベース表
+       ========================= */
+
+    .database {
+      max-width: 1320px;
+      margin: 0 auto 60px;
+      padding: 0 24px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: #fff;
+      border: 1px solid #d8d8d8;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1050px;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: #eef0f2;
+    }
+
+    th {
+      padding: 12px 10px;
+      text-align: left;
+      font-weight: 650;
+      color: #444;
+      border-bottom: 1px solid #ccc;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 13px 10px;
+      vertical-align: top;
+      border-bottom: 1px solid #e6e6e6;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: #fafbfc;
+    }
+
+    .col-id {
+      width: 65px;
+      white-space: nowrap;
+      color: #666;
+    }
+
+    .col-year {
+      width: 75px;
+      white-space: nowrap;
+    }
+
+    .col-title {
+      width: 27%;
+      min-width: 240px;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .col-summary {
+      width: 42%;
+      min-width: 380px;
+      color: #444;
+    }
+
+    .col-source {
+      width: 105px;
+      white-space: nowrap;
+    }
 
     .article-link {
-
       display: inline-block;
-
-      margin-top: 5px;
-
-      padding: 7px 13px;
-
-      border-radius: 6px;
-
-      background: #f0f3f6;
-
-      color: #174b7a;
-
+      padding: 5px 9px;
+      border-radius: 4px;
+      background: #edf2f6;
+      color: #155282;
       text-decoration: none;
-
-      font-weight: 600;
-
+      font-size: 0.84rem;
     }
-
 
     .article-link:hover {
-
-      background: #e4e9ee;
-
       text-decoration: underline;
+      background: #e5ebf0;
+    }
 
+    .unconfirmed {
+      color: #888;
+      font-size: 0.84rem;
     }
 
 
-    .url-unconfirmed {
+    /* =========================
+       詳細情報
+       ========================= */
 
-      display: inline-block;
-
-      margin-top: 5px;
-
-      color: #777;
-
+    details {
+      margin-top: 8px;
+      font-weight: normal;
     }
 
-
-
-    /*
-    ==============================
-    詳細情報
-    ==============================
-    */
-
-    .details {
-
-      margin-top: 20px;
-
-      padding-top: 14px;
-
-      border-top: 1px solid #eee;
-
-    }
-
-
-    .details summary {
-
+    summary {
       cursor: pointer;
-
-      color: #555;
-
+      color: #586673;
+      font-size: 0.82rem;
       font-weight: 600;
-
-      font-size: 0.95rem;
-
-      user-select: none;
-
     }
 
-
-    .details summary:hover {
-
-      color: #111;
-
+    summary:hover {
+      text-decoration: underline;
     }
 
+    .detail-box {
+      margin-top: 10px;
+      padding: 12px 13px;
+      background: #f6f7f8;
+      border-radius: 5px;
+      font-size: 0.85rem;
+    }
 
-    .tags {
-
-      margin-top: 17px;
-
+    .detail-row {
       display: grid;
-
-      grid-template-columns: 125px 1fr;
-
-      gap: 9px 18px;
-
-      font-size: 0.94rem;
-
+      grid-template-columns: 90px 1fr;
+      gap: 7px 10px;
+      margin-bottom: 7px;
     }
 
+    .detail-row:last-child {
+      margin-bottom: 0;
+    }
 
-    .tag-label {
-
+    .detail-label {
+      font-weight: 650;
       color: #555;
-
-      font-weight: 700;
-
     }
 
-
-    .tag-value {
-
+    .detail-value {
       color: #444;
-
       word-break: break-word;
-
     }
 
 
-    .note {
-
-      margin-top: 15px;
-
-      padding-top: 12px;
-
-      border-top: 1px dashed #ddd;
-
-      color: #666;
-
-      font-size: 0.9rem;
-
-    }
-
-
-
-    /*
-    ==============================
-    検索時
-    ==============================
-    */
+    /* =========================
+       非表示・0件
+       ========================= */
 
     .hidden {
-
       display: none;
-
     }
 
-
-    .no-result {
-
+    #noResult {
       display: none;
-
-      background: white;
-
-      border: 1px solid #ddd;
-
-      border-radius: 10px;
-
-      padding: 30px;
-
+      padding: 35px;
       text-align: center;
-
       color: #666;
-
+      background: #fff;
     }
 
 
+    /* =========================
+       スマートフォン
+       ========================= */
 
-    /*
-    ==============================
-    スマートフォン
-    ==============================
-    */
-
-    @media (max-width: 700px) {
-
+    @media (max-width: 800px) {
 
       .header-inner,
-      .tools,
-      .result-count,
-      main {
-
-        padding-left: 16px;
-
-        padding-right: 16px;
-
+      .filter-area,
+      .database {
+        padding-left: 14px;
+        padding-right: 14px;
       }
-
 
       h1 {
-
-        font-size: 1.55rem;
-
+        font-size: 1.45rem;
       }
 
-
-      .intro {
-
-        font-size: 0.94rem;
-
-      }
-
-
-      .tool-box {
-
+      .search-row {
         display: block;
-
       }
 
-
-      input,
-      select {
-
+      #searchBox {
         width: 100%;
-
-        margin-bottom: 10px;
-
       }
 
-
-      .project-card {
-
-        padding: 20px;
-
-      }
-
-
-      .project-title {
-
-        font-size: 1.18rem;
-
-      }
-
-
-      .tags {
-
+      .filters {
         grid-template-columns: 1fr;
-
-        gap: 2px;
-
       }
 
-
-      .tag-label {
-
-        margin-top: 10px;
-
+      .filter-actions {
+        align-items: flex-start;
+        gap: 10px;
       }
-
-
-      .tag-value {
-
-        margin-bottom: 2px;
-
-      }
-
     }
 
   </style>
-
 </head>
 
 
@@ -613,25 +382,17 @@ layout: null
   <div class="header-inner">
 
     <h1>
-      あるきめでぃあ／すがもプロジェクト<br>
-      過去企画データベース
+      あるきめでぃあ／すがもプロジェクト 過去企画データベース
     </h1>
 
-
-    <p class="intro">
-
-      大正大学「すがもプロジェクト」および
-      学生メディア「あるきめでぃあ」に掲載された
-      過去の企画・活動を整理したデータベースです。
-
+    <p class="description">
+      大正大学「すがもプロジェクト」および学生メディア
+      「あるきめでぃあ」に掲載された過去の企画・活動を整理したデータベースです。
     </p>
 
-
-    <div class="count">
-
+    <div class="total-count">
       収録件数：
       <strong>{{ site.data.projects | size }}</strong>件
-
     </div>
 
   </div>
@@ -640,347 +401,679 @@ layout: null
 
 
 
-<!-- 検索・絞り込み -->
+<!-- =========================
+     検索・絞り込み
+     ========================= -->
 
-<div class="tools">
+<div class="filter-area">
 
-  <div class="tool-box">
+  <div class="filter-panel">
 
-    <input
-      type="search"
-      id="searchBox"
-      placeholder="キーワードで検索（例：観光、商店街、銭湯、子ども）"
-      aria-label="キーワード検索"
-    >
 
+    <div class="search-row">
 
-    <select
-      id="yearFilter"
-      aria-label="年度で絞り込み"
-    >
-
-      <option value="">
-        すべての年度
-      </option>
-
-      <option value="2026">
-        2026年度
-      </option>
-
-      <option value="2025">
-        2025年度
-      </option>
-
-      <option value="2024">
-        2024年度
-      </option>
-
-      <option value="2023">
-        2023年度
-      </option>
-
-      <option value="2022">
-        2022年度
-      </option>
-
-      <option value="2021">
-        2021年度
-      </option>
-
-      <option value="2020">
-        2020年度
-      </option>
-
-    </select>
-
-  </div>
-
-</div>
-
-
-<div
-  class="result-count"
-  id="resultCount"
->
-</div>
-
-
-
-<main>
-
-
-{% for project in site.data.projects %}
-
-
-<article
-  class="project-card"
-  id="db-{{ project['DB_ID'] }}"
-  data-year="{{ project['年度'] }}"
->
-
-
-  <!-- DB ID・年度・公開時期 -->
-
-  <div class="meta-top">
-
-
-    <span class="badge">
-
-      DB_ID：
-      {{ project['DB_ID'] }}
-
-    </span>
-
-
-    <span class="badge">
-
-      {{ project['年度'] }}年度
-
-    </span>
-
-
-    {% if project['公開時期']
-       and project['公開時期'] != "" %}
-
-    <span class="badge">
-
-      公開：
-      {{ project['公開時期'] }}
-
-    </span>
-
-    {% endif %}
-
-
-  </div>
-
-
-
-  <!-- タイトル -->
-
-  <h2 class="project-title">
-
-    {{ project['整理版タイトル'] }}
-
-  </h2>
-
-
-
-  <!-- 概要 -->
-
-  <div class="summary">
-
-    <div class="section-label">
-      概要
-    </div>
-
-    <p>
-      {{ project['概要'] }}
-    </p>
-
-  </div>
-
-
-
-  <!-- 元記事 -->
-
-  <div class="source">
-
-
-    <div class="section-label">
-      元記事
-    </div>
-
-
-    {% if project['元記事URL']
-       and project['元記事URL'] != "" %}
-
-
-      <a
-        class="article-link"
-        href="{{ project['元記事URL'] }}"
-        target="_blank"
-        rel="noopener noreferrer"
+      <input
+        id="searchBox"
+        type="search"
+        placeholder="キーワードで検索（例：観光、商店街、銭湯、子ども）"
+        aria-label="キーワード検索"
       >
 
-        元記事を読む
-
-      </a>
+    </div>
 
 
-    {% else %}
+    <div class="filters">
 
 
-      <span class="url-unconfirmed">
+      <div class="filter-item">
 
-        元記事URL未確認
+        <label
+          class="filter-label"
+          for="yearFilter"
+        >
+          年度
+        </label>
 
-      </span>
+        <select id="yearFilter">
+
+          <option value="">
+            すべて
+          </option>
+
+        </select>
+
+      </div>
 
 
-    {% endif %}
+      <div class="filter-item">
+
+        <label
+          class="filter-label"
+          for="resourceFilter"
+        >
+          地域資源
+        </label>
+
+        <select id="resourceFilter">
+
+          <option value="">
+            すべて
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-item">
+
+        <label
+          class="filter-label"
+          for="targetFilter"
+        >
+          対象者
+        </label>
+
+        <select id="targetFilter">
+
+          <option value="">
+            すべて
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-item">
+
+        <label
+          class="filter-label"
+          for="valueFilter"
+        >
+          価値
+        </label>
+
+        <select id="valueFilter">
+
+          <option value="">
+            すべて
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-item">
+
+        <label
+          class="filter-label"
+          for="experienceFilter"
+        >
+          体験・交流
+        </label>
+
+        <select id="experienceFilter">
+
+          <option value="">
+            すべて
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-item">
+
+        <label
+          class="filter-label"
+          for="formatFilter"
+        >
+          企画形式
+        </label>
+
+        <select id="formatFilter">
+
+          <option value="">
+            すべて
+          </option>
+
+        </select>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="filter-actions">
+
+      <div id="resultInfo">
+      </div>
+
+      <button
+        id="clearFilters"
+        type="button"
+      >
+        条件をクリア
+      </button>
+
+    </div>
 
 
   </div>
 
-
-
-  <!-- タグ・詳細 -->
-
-  <details class="details">
-
-
-    <summary>
-
-      タグ・詳細情報を見る
-
-    </summary>
-
-
-    <div class="tags">
-
-
-      <div class="tag-label">
-        地域資源
-      </div>
-
-      <div class="tag-value">
-        {{ project['地域資源タグ'] }}
-      </div>
-
-
-
-      <div class="tag-label">
-        対象者
-      </div>
-
-      <div class="tag-value">
-        {{ project['対象者タグ'] }}
-      </div>
-
-
-
-      <div class="tag-label">
-        価値
-      </div>
-
-      <div class="tag-value">
-        {{ project['価値タグ'] }}
-      </div>
-
-
-
-      <div class="tag-label">
-        体験・交流
-      </div>
-
-      <div class="tag-value">
-        {{ project['体験・交流タグ'] }}
-      </div>
-
-
-
-      <div class="tag-label">
-        企画形式
-      </div>
-
-      <div class="tag-value">
-        {{ project['企画形式タグ'] }}
-      </div>
-
-
-
-      <div class="tag-label">
-        URL確認状況
-      </div>
-
-      <div class="tag-value">
-        {{ project['URL確認状況'] }}
-      </div>
-
-
-    </div>
-
-
-
-    {% if project['備考']
-       and project['備考'] != "" %}
-
-    <div class="note">
-
-      <strong>備考：</strong>
-
-      {{ project['備考'] }}
-
-    </div>
-
-    {% endif %}
-
-
-  </details>
-
-
-</article>
-
-
-{% endfor %}
-
-
-
-<div
-  id="noResult"
-  class="no-result"
->
-
-  条件に一致する企画は見つかりませんでした。
-
 </div>
 
 
-</main>
+
+<!-- =========================
+     データベース
+     ========================= -->
+
+<div class="database">
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th class="col-id">
+            DB_ID
+          </th>
+
+          <th class="col-year">
+            年度
+          </th>
+
+          <th class="col-title">
+            記事・企画タイトル
+          </th>
+
+          <th class="col-summary">
+            概要
+          </th>
+
+          <th class="col-source">
+            元記事
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+
+      {% for project in site.data.projects %}
+
+
+        <tr
+          class="db-row"
+
+          data-year="{{ project['年度'] | escape }}"
+
+          data-resource="{{ project['地域資源タグ'] | escape }}"
+
+          data-target="{{ project['対象者タグ'] | escape }}"
+
+          data-value="{{ project['価値タグ'] | escape }}"
+
+          data-experience="{{ project['体験・交流タグ'] | escape }}"
+
+          data-format="{{ project['企画形式タグ'] | escape }}"
+        >
+
+
+          <!-- DB_ID -->
+
+          <td class="col-id">
+
+            {{ project['DB_ID'] }}
+
+          </td>
+
+
+
+          <!-- 年度 -->
+
+          <td class="col-year">
+
+            {{ project['年度'] }}
+
+          </td>
+
+
+
+          <!-- タイトル -->
+
+          <td class="col-title">
+
+            {{ project['整理版タイトル'] }}
+
+
+            <details>
+
+              <summary>
+                詳細を見る
+              </summary>
+
+
+              <div class="detail-box">
+
+
+                <div class="detail-row">
+
+                  <div class="detail-label">
+                    公開時期
+                  </div>
+
+                  <div class="detail-value">
+                    {{ project['公開時期'] }}
+                  </div>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                  <div class="detail-label">
+                    地域資源
+                  </div>
+
+                  <div class="detail-value">
+                    {{ project['地域資源タグ'] }}
+                  </div>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                  <div class="detail-label">
+                    対象者
+                  </div>
+
+                  <div class="detail-value">
+                    {{ project['対象者タグ'] }}
+                  </div>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                  <div class="detail-label">
+                    価値
+                  </div>
+
+                  <div class="detail-value">
+                    {{ project['価値タグ'] }}
+                  </div>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                  <div class="detail-label">
+                    体験・交流
+                  </div>
+
+                  <div class="detail-value">
+                    {{ project['体験・交流タグ'] }}
+                  </div>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                  <div class="detail-label">
+                    企画形式
+                  </div>
+
+                  <div class="detail-value">
+                    {{ project['企画形式タグ'] }}
+                  </div>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                  <div class="detail-label">
+                    URL確認
+                  </div>
+
+                  <div class="detail-value">
+                    {{ project['URL確認状況'] }}
+                  </div>
+
+                </div>
+
+
+
+                {% if project['備考']
+                   and project['備考'] != "" %}
+
+                <div class="detail-row">
+
+                  <div class="detail-label">
+                    備考
+                  </div>
+
+                  <div class="detail-value">
+                    {{ project['備考'] }}
+                  </div>
+
+                </div>
+
+                {% endif %}
+
+
+              </div>
+
+
+            </details>
+
+
+          </td>
+
+
+
+          <!-- 概要 -->
+
+          <td class="col-summary">
+
+            {{ project['概要'] }}
+
+          </td>
+
+
+
+          <!-- 元記事 -->
+
+          <td class="col-source">
+
+
+            {% if project['元記事URL']
+               and project['元記事URL'] != "" %}
+
+
+              <a
+                class="article-link"
+                href="{{ project['元記事URL'] }}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                記事を開く
+              </a>
+
+
+            {% else %}
+
+
+              <span class="unconfirmed">
+                未確認
+              </span>
+
+
+            {% endif %}
+
+
+          </td>
+
+
+        </tr>
+
+
+      {% endfor %}
+
+
+      </tbody>
+
+    </table>
+
+
+    <div id="noResult">
+
+      条件に一致する企画はありません。
+
+    </div>
+
+
+  </div>
+
+</div>
 
 
 
 <script>
 
-  /*
-  ==============================
-  検索・年度絞り込み
-  ==============================
-  */
-
+  /* =========================
+     DOM取得
+     ========================= */
 
   const searchBox =
     document.getElementById("searchBox");
 
-
   const yearFilter =
     document.getElementById("yearFilter");
 
+  const resourceFilter =
+    document.getElementById("resourceFilter");
 
-  const cards =
-    document.querySelectorAll(".project-card");
+  const targetFilter =
+    document.getElementById("targetFilter");
 
+  const valueFilter =
+    document.getElementById("valueFilter");
 
-  const resultCount =
-    document.getElementById("resultCount");
+  const experienceFilter =
+    document.getElementById("experienceFilter");
 
+  const formatFilter =
+    document.getElementById("formatFilter");
+
+  const clearFilters =
+    document.getElementById("clearFilters");
+
+  const resultInfo =
+    document.getElementById("resultInfo");
 
   const noResult =
     document.getElementById("noResult");
 
+  const rows =
+    document.querySelectorAll(".db-row");
 
 
-  function filterProjects() {
+
+  /* =========================
+     タグ分割
+     「 ; 」と「；」の両方に対応
+     ========================= */
+
+  function splitTags(text) {
+
+    if (!text) {
+      return [];
+    }
+
+    return text
+      .split(/[;；]/)
+      .map(tag => tag.trim())
+      .filter(tag =>
+        tag !== "" &&
+        tag !== "記載なし"
+      );
+
+  }
+
+
+
+  /* =========================
+     年度選択肢を自動作成
+     ========================= */
+
+  function createYearOptions() {
+
+    const years =
+      new Set();
+
+    rows.forEach(row => {
+
+      const year =
+        row.dataset.year.trim();
+
+      if (year) {
+        years.add(year);
+      }
+
+    });
+
+
+    [...years]
+
+      .sort((a, b) =>
+        Number(b) - Number(a)
+      )
+
+      .forEach(year => {
+
+        const option =
+          document.createElement("option");
+
+        option.value =
+          year;
+
+        option.textContent =
+          year + "年度";
+
+        yearFilter.appendChild(option);
+
+      });
+
+  }
+
+
+
+  /* =========================
+     タグ選択肢を自動作成
+     ========================= */
+
+  function createTagOptions(
+    selectElement,
+    dataKey
+  ) {
+
+    const tags =
+      new Set();
+
+
+    rows.forEach(row => {
+
+      const values =
+        splitTags(
+          row.dataset[dataKey]
+        );
+
+
+      values.forEach(tag => {
+
+        tags.add(tag);
+
+      });
+
+    });
+
+
+    [...tags]
+
+      .sort((a, b) =>
+        a.localeCompare(
+          b,
+          "ja"
+        )
+      )
+
+      .forEach(tag => {
+
+        const option =
+          document.createElement("option");
+
+        option.value =
+          tag;
+
+        option.textContent =
+          tag;
+
+        selectElement.appendChild(
+          option
+        );
+
+      });
+
+  }
+
+
+
+  /* =========================
+     選択タグを含むか
+     ========================= */
+
+  function hasSelectedTag(
+    row,
+    dataKey,
+    selected
+  ) {
+
+    if (!selected) {
+      return true;
+    }
+
+
+    const tags =
+      splitTags(
+        row.dataset[dataKey]
+      );
+
+
+    return tags.includes(
+      selected
+    );
+
+  }
+
+
+
+  /* =========================
+     絞り込み処理
+     ========================= */
+
+  function filterRows() {
 
 
     const keyword =
       searchBox.value
-        .toLowerCase()
-        .trim();
+        .trim()
+        .toLowerCase();
 
 
-    const year =
+    const selectedYear =
       yearFilter.value;
 
 
@@ -988,95 +1081,207 @@ layout: null
 
 
 
-    cards.forEach(card => {
+    rows.forEach(row => {
 
 
-      const text =
-        card.textContent
+      const rowText =
+        row.textContent
           .toLowerCase();
 
 
-      const cardYear =
-        card.dataset.year;
-
-
-      const keywordMatch =
+      const keywordOK =
         keyword === "" ||
-        text.includes(keyword);
+        rowText.includes(
+          keyword
+        );
 
 
-      const yearMatch =
-        year === "" ||
-        cardYear === year;
+      const yearOK =
+        selectedYear === "" ||
+        row.dataset.year ===
+          selectedYear;
+
+
+      const resourceOK =
+        hasSelectedTag(
+          row,
+          "resource",
+          resourceFilter.value
+        );
+
+
+      const targetOK =
+        hasSelectedTag(
+          row,
+          "target",
+          targetFilter.value
+        );
+
+
+      const valueOK =
+        hasSelectedTag(
+          row,
+          "value",
+          valueFilter.value
+        );
+
+
+      const experienceOK =
+        hasSelectedTag(
+          row,
+          "experience",
+          experienceFilter.value
+        );
+
+
+      const formatOK =
+        hasSelectedTag(
+          row,
+          "format",
+          formatFilter.value
+        );
+
+
+      const visible =
+        keywordOK &&
+        yearOK &&
+        resourceOK &&
+        targetOK &&
+        valueOK &&
+        experienceOK &&
+        formatOK;
 
 
 
-      if (keywordMatch && yearMatch) {
+      if (visible) {
 
-
-        card.classList.remove("hidden");
+        row.classList.remove(
+          "hidden"
+        );
 
         visibleCount++;
 
-
       } else {
 
-
-        card.classList.add("hidden");
-
+        row.classList.add(
+          "hidden"
+        );
 
       }
-
 
     });
 
 
 
-    resultCount.textContent =
+    resultInfo.textContent =
       "表示件数：" +
       visibleCount +
       "件";
 
 
-    if (visibleCount === 0) {
-
-
-      noResult.style.display =
-        "block";
-
-
-    } else {
-
-
-      noResult.style.display =
-        "none";
-
-
-    }
-
+    noResult.style.display =
+      visibleCount === 0
+        ? "block"
+        : "none";
 
   }
 
 
 
+  /* =========================
+     初期化
+     ========================= */
+
+  createYearOptions();
+
+  createTagOptions(
+    resourceFilter,
+    "resource"
+  );
+
+  createTagOptions(
+    targetFilter,
+    "target"
+  );
+
+  createTagOptions(
+    valueFilter,
+    "value"
+  );
+
+  createTagOptions(
+    experienceFilter,
+    "experience"
+  );
+
+  createTagOptions(
+    formatFilter,
+    "format"
+  );
+
+
+
+  /* =========================
+     イベント
+     ========================= */
+
   searchBox.addEventListener(
     "input",
-    filterProjects
+    filterRows
   );
 
 
-  yearFilter.addEventListener(
-    "change",
-    filterProjects
+  [
+    yearFilter,
+    resourceFilter,
+    targetFilter,
+    valueFilter,
+    experienceFilter,
+    formatFilter
+
+  ].forEach(select => {
+
+    select.addEventListener(
+      "change",
+      filterRows
+    );
+
+  });
+
+
+
+  /* =========================
+     条件クリア
+     ========================= */
+
+  clearFilters.addEventListener(
+    "click",
+    function () {
+
+      searchBox.value = "";
+
+      yearFilter.value = "";
+
+      resourceFilter.value = "";
+
+      targetFilter.value = "";
+
+      valueFilter.value = "";
+
+      experienceFilter.value = "";
+
+      formatFilter.value = "";
+
+      filterRows();
+
+    }
   );
 
 
-  /*
-  初回表示時にも件数を表示
-  */
 
-  filterProjects();
+  /* 初回表示 */
 
+  filterRows();
 
 </script>
 
