@@ -2,527 +2,160 @@
 <html lang="ja">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-<title>knowledge.html 生成</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  font-family: sans-serif;
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  line-height: 1.7;
-}
+  <meta name="robots"
+        content="index,follow">
 
-button {
-  font-size: 18px;
-  padding: 12px 24px;
-  cursor: pointer;
-}
+  <title>
+    あるきめでぃあ／すがもプロジェクト 過去企画データベース
+  </title>
 
-#status {
-  margin-top: 20px;
-}
-</style>
+  <meta name="description"
+        content="大正大学「すがもプロジェクト」および学生メディア「あるきめでぃあ」の過去企画データベース。Copilot・検索エンジン参照用。">
+
+  <style>
+
+    body {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Yu Gothic",
+        Meiryo,
+        sans-serif;
+
+      color: #222;
+      line-height: 1.7;
+      background: #fff;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .description {
+      margin-bottom: 30px;
+      padding: 18px 20px;
+      background: #f4f5f6;
+      border-radius: 6px;
+    }
+
+    .description p {
+      margin: 6px 0;
+    }
+
+    h2 {
+      margin-top: 35px;
+      font-size: 20px;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+
+      padding: 20px;
+
+      border: 1px solid #ddd;
+      border-radius: 6px;
+
+      background: #fafafa;
+
+      font-family:
+        "Yu Gothic",
+        Meiryo,
+        sans-serif;
+
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .source {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #666;
+    }
+
+  </style>
+
 </head>
 
 
 <body>
 
-<h1>knowledge.html 生成</h1>
-
-<p>
-「あるきめでぃあ／すがもプロジェクト 過去企画データベース」の
-CSVから、Copilot・検索エンジン参照用の静的HTMLを生成します。
-</p>
-
-<button id="generate">
-knowledge.html を生成
-</button>
-
-<div id="status"></div>
-
-
-<script>
-
-const CSV_URL = "./_data/projects.csv";
-
-
-/* =====================================
-   CSV解析
-   ===================================== */
-
-function parseCSV(text) {
-
-  const rows = [];
-
-  let row = [];
-  let field = "";
-  let quoted = false;
-
-
-  for (let i = 0; i < text.length; i++) {
-
-    const c = text[i];
-
-
-    if (c === '"') {
-
-      if (quoted && text[i + 1] === '"') {
-
-        field += '"';
-        i++;
-
-      } else {
-
-        quoted = !quoted;
-
-      }
-
-    }
-
-    else if (c === "," && !quoted) {
-
-      row.push(field);
-      field = "";
-
-    }
-
-    else if (
-      (c === "\n" || c === "\r") &&
-      !quoted
-    ) {
-
-      if (
-        c === "\r" &&
-        text[i + 1] === "\n"
-      ) {
-        i++;
-      }
-
-      row.push(field);
-
-      if (row.some(v => v.trim() !== "")) {
-        rows.push(row);
-      }
-
-      row = [];
-      field = "";
-
-    }
-
-    else {
-
-      field += c;
-
-    }
-
-  }
-
-
-  row.push(field);
-
-  if (row.some(v => v.trim() !== "")) {
-    rows.push(row);
-  }
-
-
-  const headers = rows[0].map(
-    h => h.replace(/^\uFEFF/, "").trim()
-  );
-
-
-  return rows.slice(1).map(values => {
-
-    const obj = {};
-
-    headers.forEach((header, index) => {
-
-      obj[header] =
-        values[index]
-          ? values[index].trim()
-          : "";
-
-    });
-
-    return obj;
-
-  });
-
-}
-
-
-
-/* =====================================
-   HTMLエスケープ
-   ===================================== */
-
-function esc(value) {
-
-  return String(value || "")
-
-    .replaceAll("&", "&amp;")
-
-    .replaceAll("<", "&lt;")
-
-    .replaceAll(">", "&gt;")
-
-    .replaceAll('"', "&quot;")
-
-    .replaceAll("'", "&#039;");
-
-}
-
-
-
-/* =====================================
-   1レコード
-   ===================================== */
-
-function makeRecord(p) {
-
-  const id =
-    esc(p["DB_ID"]);
-
-  const year =
-    esc(p["年度"]);
-
-  const title =
-    esc(p["整理版タイトル"]);
-
-  const published =
-    esc(p["公開時期"]);
-
-  const summary =
-    esc(p["概要"]);
-
-  const url =
-    esc(p["元記事URL"]);
-
-  const status =
-    esc(p["URL確認状況"]);
-
-  const note =
-    esc(p["備考"]);
-
-  const resource =
-    esc(p["地域資源タグ"]);
-
-  const target =
-    esc(p["対象者タグ"]);
-
-  const value =
-    esc(p["価値タグ"]);
-
-  const experience =
-    esc(p["体験・交流タグ"]);
-
-  const format =
-    esc(p["企画形式タグ"]);
-
-
-  return `
-
-<article id="db-${id}" class="record">
-
-  <h2>DB_ID: ${id}</h2>
-
-  <dl>
-
-    <dt>DB_ID</dt>
-    <dd>${id}</dd>
-
-    <dt>年度</dt>
-    <dd>${year}</dd>
-
-    <dt>正式タイトル</dt>
-    <dd>${title}</dd>
-
-    <dt>公開時期</dt>
-    <dd>${published}</dd>
-
-    <dt>概要</dt>
-    <dd>${summary}</dd>
-
-    <dt>元記事URL</dt>
-    <dd>${url || "確認できません"}</dd>
-
-    <dt>URL確認状況</dt>
-    <dd>${status}</dd>
-
-    <dt>地域資源</dt>
-    <dd>${resource}</dd>
-
-    <dt>対象者</dt>
-    <dd>${target}</dd>
-
-    <dt>価値</dt>
-    <dd>${value}</dd>
-
-    <dt>体験・交流</dt>
-    <dd>${experience}</dd>
-
-    <dt>企画形式</dt>
-    <dd>${format}</dd>
-
-    <dt>備考</dt>
-    <dd>${note}</dd>
-
-  </dl>
-
-</article>
-
-<hr>
-
-`;
-
-}
-
-
-
-/* =====================================
-   knowledge.html生成
-   ===================================== */
-
-async function generate() {
-
-  const status =
-    document.getElementById("status");
-
-
-  try {
-
-    status.textContent =
-      "CSVを読み込んでいます…";
-
-
-    const response =
-      await fetch(
-        CSV_URL,
-        { cache: "no-store" }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "CSVを取得できませんでした。"
-      );
-
-    }
-
-
-    const csv =
-      await response.text();
-
-
-    const projects =
-      parseCSV(csv);
-
-
-    const records =
-      projects
-        .map(makeRecord)
-        .join("\n");
-
-
-
-    const knowledgeHTML =
-`<!DOCTYPE html>
-
-<html lang="ja">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<meta name="robots"
-      content="index,follow">
-
-<title>
-あるきめでぃあ／すがもプロジェクト 過去企画データベース
-</title>
-
-<meta name="description"
-      content="大正大学すがもプロジェクト・あるきめでぃあの過去企画を整理したCopilot・検索参照用データベース">
-
-<style>
-
-body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Yu Gothic",
-    Meiryo,
-    sans-serif;
-
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 0 24px;
-  line-height: 1.7;
-  color: #222;
-}
-
-h1 {
-  font-size: 28px;
-}
-
-.notice {
-  background: #f4f5f6;
-  padding: 16px;
-  margin: 20px 0 35px;
-}
-
-.record {
-  margin: 35px 0;
-}
-
-.record h2 {
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-dl {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 7px 20px;
-}
-
-dt {
-  font-weight: bold;
-}
-
-dd {
-  margin: 0;
-  word-break: break-word;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid #ddd;
-  margin: 35px 0;
-}
-
-</style>
-
-</head>
-
-
-<body>
 
 <h1>
-あるきめでぃあ／すがもプロジェクト 過去企画データベース
+  あるきめでぃあ／すがもプロジェクト 過去企画データベース
 </h1>
 
-<div class="notice">
 
-<p>
-このページは、大正大学「すがもプロジェクト」および
-学生メディア「あるきめでぃあ」の過去企画を整理した
-参照用データベースです。
-</p>
+<div class="description">
 
-<p>
-収録件数：${projects.length}件
-</p>
+  <p>
+    このページは、大正大学「すがもプロジェクト」および
+    学生メディア「あるきめでぃあ」に掲載された
+    過去の企画・活動を整理した参照用データベースです。
+  </p>
 
-<p>
-記事を参照する場合は、
-必ず同一のDB_IDに属する
-年度・正式タイトル・概要・元記事URLを
-一つのレコードとして扱ってください。
-</p>
+  <p>
+    各レコードはDB_IDによって識別されています。
+  </p>
 
-<p>
-DBに登録されていない情報を推測して補完しないでください。
-</p>
+  <p>
+    記事を参照する場合は、
+    同一のDB_IDに記載された
+    「年度」「整理版タイトル」「概要」「元記事URL」
+    を同一レコードの情報として扱ってください。
+  </p>
+
+  <p>
+    DBに記載されていない情報を推測して補完しないでください。
+  </p>
 
 </div>
 
 
-<main>
-
-${records}
-
-</main>
+<h2>
+  データベース
+</h2>
 
 
-</body>
+<pre>
 
-</html>`;
+ここに projects.csv の内容を、
+1行目の列名を含めてすべて貼り付けてください。
 
+例：
 
-    const blob =
-      new Blob(
-        [knowledgeHTML],
-        {
-          type:
-            "text/html;charset=utf-8"
-        }
-      );
+index,DB_ID,年度,整理版タイトル,公開時期,概要,元記事URL,URL確認状況,備考,地域資源タグ,対象者タグ,価値タグ,体験・交流タグ,企画形式タグ
+0,1,2026,熱かった冷たいけれど／銭湯コミュニティ班の盆踊り企画報告,2026年9月,鴨台盆踊りで銭湯コミュニティ班が行った企画の活動報告。...,https://note.com/arukimedia/n/n3460b8db0ed9,確認済み,,銭湯・入浴文化 ; 地域・大学イベント,子ども・家族 ; 来街者・イベント来場者,地域理解・再発見 ; 参加・体験の入口づくり,ワークショップ・ものづくり ; 入浴・足湯体験 ; イベント参加・運営,ワークショップ ; イベント出店・催事
 
+この下にDB_ID 2～90までをそのまま続けます。
 
-    const downloadURL =
-      URL.createObjectURL(blob);
+</pre>
 
 
-    const a =
-      document.createElement("a");
+<div class="source">
 
-    a.href =
-      downloadURL;
+  <p>
+    データ名称：
+    あるきめでぃあ／すがもプロジェクト 過去企画データベース
+  </p>
 
-    a.download =
-      "knowledge.html";
+  <p>
+    収録範囲：2020年度～2026年度
+  </p>
 
+</div>
 
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-
-    URL.revokeObjectURL(
-      downloadURL
-    );
-
-
-    status.textContent =
-      projects.length +
-      "件を含む knowledge.html を生成しました。";
-
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    status.textContent =
-      "生成できませんでした：" +
-      error.message;
-
-  }
-
-}
-
-
-
-document
-  .getElementById("generate")
-  .addEventListener(
-    "click",
-    generate
-  );
-
-</script>
 
 </body>
 
