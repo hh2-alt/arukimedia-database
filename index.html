@@ -1,376 +1,340 @@
----
-layout: null
----
-
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>あるきめでぃあ／すがもプロジェクト 過去企画データベース</title>
-
-  <meta name="description"
-        content="大正大学「すがもプロジェクト」および学生メディア「あるきめでぃあ」に掲載された過去企画・活動を整理したデータベースです。">
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Hiragino Kaku Gothic ProN",
-        "Yu Gothic",
-        Meiryo,
-        sans-serif;
-
-      color: #222;
-      background: #f5f6f8;
-      line-height: 1.6;
-    }
-
-
-    /* =========================
-       ヘッダー
-       ========================= */
-
-    header {
-      background: #fff;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .header-inner {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 30px 24px 24px;
-    }
-
-    h1 {
-      margin: 0 0 10px;
-      font-size: 1.9rem;
-      line-height: 1.4;
-    }
-
-    .description {
-      margin: 0;
-      color: #666;
-      font-size: 0.95rem;
-    }
-
-    .total-count {
-      margin-top: 12px;
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-
-    /* =========================
-       検索・絞り込み
-       ========================= */
-
-    .filter-area {
-      max-width: 1320px;
-      margin: 22px auto 14px;
-      padding: 0 24px;
-    }
-
-    .filter-panel {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 18px;
-    }
-
-    .search-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    #searchBox {
-      flex: 1;
-    }
-
-    input,
-    select,
-    button {
-      font-family: inherit;
-      font-size: 0.95rem;
-    }
-
-    input,
-    select {
-      border: 1px solid #bbb;
-      border-radius: 5px;
-      background: #fff;
-      padding: 10px 11px;
-    }
-
-    input:focus,
-    select:focus {
-      outline: 2px solid #777;
-      outline-offset: 1px;
-    }
-
-    .filters {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(180px, 1fr));
-      gap: 10px;
-    }
-
-    .filter-label {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 0.78rem;
-      color: #666;
-      font-weight: 600;
-    }
-
-    .filter-item select {
-      width: 100%;
-    }
-
-    .filter-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 14px;
-      padding-top: 13px;
-      border-top: 1px solid #eee;
-    }
-
-    #resultInfo {
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    #clearFilters {
-      border: 1px solid #bbb;
-      background: #fff;
-      border-radius: 5px;
-      padding: 8px 14px;
-      cursor: pointer;
-      color: #444;
-    }
-
-    #clearFilters:hover {
-      background: #f0f1f2;
-    }
-
-
-    /* =========================
-       データベース表
-       ========================= */
-
-    .database {
-      max-width: 1320px;
-      margin: 0 auto 60px;
-      padding: 0 24px;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-      background: #fff;
-      border: 1px solid #d8d8d8;
-      border-radius: 8px;
-    }
-
-    table {
-      width: 100%;
-      min-width: 1050px;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
-
-    thead {
-      background: #eef0f2;
-    }
-
-    th {
-      padding: 12px 10px;
-      text-align: left;
-      font-weight: 650;
-      color: #444;
-      border-bottom: 1px solid #ccc;
-      white-space: nowrap;
-    }
-
-    td {
-      padding: 13px 10px;
-      vertical-align: top;
-      border-bottom: 1px solid #e6e6e6;
-    }
-
-    tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    tbody tr:hover {
-      background: #fafbfc;
-    }
-
-    .col-id {
-      width: 65px;
-      white-space: nowrap;
-      color: #666;
-    }
-
-    .col-year {
-      width: 75px;
-      white-space: nowrap;
-    }
-
-    .col-title {
-      width: 27%;
-      min-width: 240px;
-      font-weight: 600;
-      line-height: 1.55;
-    }
-
-    .col-summary {
-      width: 42%;
-      min-width: 380px;
-      color: #444;
-    }
-
-    .col-source {
-      width: 105px;
-      white-space: nowrap;
-    }
-
-    .article-link {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 4px;
-      background: #edf2f6;
-      color: #155282;
-      text-decoration: none;
-      font-size: 0.84rem;
-    }
-
-    .article-link:hover {
-      text-decoration: underline;
-      background: #e5ebf0;
-    }
-
-    .unconfirmed {
-      color: #888;
-      font-size: 0.84rem;
-    }
-
-
-    /* =========================
-       詳細情報
-       ========================= */
-
-    details {
-      margin-top: 8px;
-      font-weight: normal;
-    }
-
-    summary {
-      cursor: pointer;
-      color: #586673;
-      font-size: 0.82rem;
-      font-weight: 600;
-    }
-
-    summary:hover {
-      text-decoration: underline;
-    }
-
-    .detail-box {
-      margin-top: 10px;
-      padding: 12px 13px;
-      background: #f6f7f8;
-      border-radius: 5px;
-      font-size: 0.85rem;
-    }
-
-    .detail-row {
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      gap: 7px 10px;
-      margin-bottom: 7px;
-    }
-
-    .detail-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .detail-label {
-      font-weight: 650;
-      color: #555;
-    }
-
-    .detail-value {
-      color: #444;
-      word-break: break-word;
-    }
-
-
-    /* =========================
-       非表示・0件
-       ========================= */
-
-    .hidden {
-      display: none;
-    }
-
-    #noResult {
-      display: none;
-      padding: 35px;
-      text-align: center;
-      color: #666;
-      background: #fff;
-    }
-
-
-    /* =========================
-       スマートフォン
-       ========================= */
-
-    @media (max-width: 800px) {
-
-      .header-inner,
-      .filter-area,
-      .database {
-        padding-left: 14px;
-        padding-right: 14px;
-      }
-
-      h1 {
-        font-size: 1.45rem;
-      }
-
-      .search-row {
-        display: block;
-      }
-
-      #searchBox {
-        width: 100%;
-      }
-
-      .filters {
-        grid-template-columns: 1fr;
-      }
-
-      .filter-actions {
-        align-items: flex-start;
-        gap: 10px;
-      }
-    }
-
-  </style>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+あるきめでぃあ／すがもプロジェクト 過去企画データベース
+</title>
+
+<meta name="description"
+      content="大正大学すがもプロジェクト・あるきめでぃあの過去企画データベース">
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    Meiryo,
+    sans-serif;
+
+  background: #f5f6f8;
+  color: #222;
+  line-height: 1.6;
+}
+
+
+/* =====================
+   ヘッダー
+   ===================== */
+
+header {
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px 26px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 1.9rem;
+}
+
+.description {
+  margin: 0;
+  color: #666;
+}
+
+.total-count {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+
+/* =====================
+   検索エリア
+   ===================== */
+
+.search-area {
+  max-width: 1400px;
+  margin: 24px auto 16px;
+  padding: 0 24px;
+}
+
+.search-panel {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.keyword-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+#keyword {
+  flex: 1;
+  padding: 11px 13px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.filter label {
+  display: block;
+  margin-bottom: 4px;
+  color: #666;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.filter select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  background: white;
+  font-size: 0.9rem;
+}
+
+.search-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 14px;
+  border-top: 1px solid #eee;
+}
+
+#resultCount {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+#clearButton {
+  padding: 8px 14px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+#clearButton:hover {
+  background: #f0f1f2;
+}
+
+
+/* =====================
+   DB表
+   ===================== */
+
+.database {
+  max-width: 1400px;
+  margin: 0 auto 60px;
+  padding: 0 24px;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead {
+  background: #eef0f2;
+}
+
+th {
+  padding: 12px 10px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #ccc;
+  color: #444;
+}
+
+td {
+  padding: 13px 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+tbody tr:hover {
+  background: #fafbfc;
+}
+
+.id-cell {
+  width: 60px;
+  color: #666;
+}
+
+.year-cell {
+  width: 75px;
+  white-space: nowrap;
+}
+
+.title-cell {
+  width: 25%;
+  min-width: 240px;
+  font-weight: 600;
+}
+
+.date-cell {
+  width: 110px;
+  white-space: nowrap;
+  color: #555;
+}
+
+.summary-cell {
+  width: 40%;
+  min-width: 360px;
+  color: #444;
+}
+
+.source-cell {
+  width: 100px;
+  white-space: nowrap;
+}
+
+.article-link {
+  display: inline-block;
+  padding: 5px 9px;
+  background: #edf2f6;
+  border-radius: 4px;
+  color: #155282;
+  text-decoration: none;
+  font-size: 0.84rem;
+}
+
+.article-link:hover {
+  text-decoration: underline;
+}
+
+.unconfirmed {
+  color: #888;
+  font-size: 0.84rem;
+}
+
+
+/* =====================
+   詳細
+   ===================== */
+
+details {
+  margin-top: 8px;
+  font-weight: normal;
+}
+
+summary {
+  cursor: pointer;
+  color: #586673;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.detail-box {
+  margin-top: 9px;
+  padding: 11px 12px;
+  background: #f5f6f7;
+  border-radius: 5px;
+  font-size: 0.84rem;
+}
+
+.detail-item {
+  margin-bottom: 7px;
+}
+
+.detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #555;
+}
+
+
+/* =====================
+   状態表示
+   ===================== */
+
+#loading,
+#error,
+#noResults {
+  padding: 35px;
+  text-align: center;
+  color: #666;
+}
+
+#error {
+  color: #9b3333;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =====================
+   スマートフォン
+   ===================== */
+
+@media (max-width: 800px) {
+
+  .header-inner,
+  .search-area,
+  .database {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  h1 {
+    font-size: 1.45rem;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+</style>
+
 </head>
 
 
@@ -379,909 +343,1182 @@ layout: null
 
 <header>
 
-  <div class="header-inner">
+<div class="header-inner">
 
-    <h1>
-      あるきめでぃあ／すがもプロジェクト 過去企画データベース
-    </h1>
+<h1>
+あるきめでぃあ／すがもプロジェクト 過去企画データベース
+</h1>
 
-    <p class="description">
-      大正大学「すがもプロジェクト」および学生メディア
-      「あるきめでぃあ」に掲載された過去の企画・活動を整理したデータベースです。
-    </p>
+<p class="description">
+大正大学「すがもプロジェクト」および学生メディア
+「あるきめでぃあ」に掲載された過去の企画・活動を整理したデータベースです。
+</p>
 
-    <div class="total-count">
-      収録件数：
-      <strong>{{ site.data.projects | size }}</strong>件
-    </div>
+<div class="total-count">
+収録件数：
+<strong id="totalCount">―</strong>件
+</div>
 
-  </div>
+</div>
 
 </header>
 
 
 
-<!-- =========================
-     検索・絞り込み
-     ========================= -->
+<section class="search-area">
 
-<div class="filter-area">
-
-  <div class="filter-panel">
+<div class="search-panel">
 
 
-    <div class="search-row">
+<div class="keyword-row">
 
-      <input
-        id="searchBox"
-        type="search"
-        placeholder="キーワードで検索（例：観光、商店街、銭湯、子ども）"
-        aria-label="キーワード検索"
-      >
-
-    </div>
-
-
-    <div class="filters">
-
-
-      <div class="filter-item">
-
-        <label
-          class="filter-label"
-          for="yearFilter"
-        >
-          年度
-        </label>
-
-        <select id="yearFilter">
-
-          <option value="">
-            すべて
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="filter-item">
-
-        <label
-          class="filter-label"
-          for="resourceFilter"
-        >
-          地域資源
-        </label>
-
-        <select id="resourceFilter">
-
-          <option value="">
-            すべて
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="filter-item">
-
-        <label
-          class="filter-label"
-          for="targetFilter"
-        >
-          対象者
-        </label>
-
-        <select id="targetFilter">
-
-          <option value="">
-            すべて
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="filter-item">
-
-        <label
-          class="filter-label"
-          for="valueFilter"
-        >
-          価値
-        </label>
-
-        <select id="valueFilter">
-
-          <option value="">
-            すべて
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="filter-item">
-
-        <label
-          class="filter-label"
-          for="experienceFilter"
-        >
-          体験・交流
-        </label>
-
-        <select id="experienceFilter">
-
-          <option value="">
-            すべて
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="filter-item">
-
-        <label
-          class="filter-label"
-          for="formatFilter"
-        >
-          企画形式
-        </label>
-
-        <select id="formatFilter">
-
-          <option value="">
-            すべて
-          </option>
-
-        </select>
-
-      </div>
-
-
-    </div>
-
-
-    <div class="filter-actions">
-
-      <div id="resultInfo">
-      </div>
-
-      <button
-        id="clearFilters"
-        type="button"
-      >
-        条件をクリア
-      </button>
-
-    </div>
-
-
-  </div>
+<input
+  type="search"
+  id="keyword"
+  placeholder="キーワードで検索（例：観光、商店街、銭湯、子ども）"
+>
 
 </div>
 
 
+<div class="filters">
 
-<!-- =========================
-     データベース
-     ========================= -->
 
-<div class="database">
+<div class="filter">
 
-  <div class="table-wrap">
+<label for="yearFilter">
+年度
+</label>
 
-    <table>
-
-      <thead>
-
-        <tr>
-
-          <th class="col-id">
-            DB_ID
-          </th>
-
-          <th class="col-year">
-            年度
-          </th>
-
-          <th class="col-title">
-            記事・企画タイトル
-          </th>
-
-          <th class="col-summary">
-            概要
-          </th>
-
-          <th class="col-source">
-            元記事
-          </th>
-
-        </tr>
-
-      </thead>
-
-
-      <tbody>
-
-
-      {% for project in site.data.projects %}
-
-
-        <tr
-          class="db-row"
-
-          data-year="{{ project['年度'] | escape }}"
-
-          data-resource="{{ project['地域資源タグ'] | escape }}"
-
-          data-target="{{ project['対象者タグ'] | escape }}"
-
-          data-value="{{ project['価値タグ'] | escape }}"
-
-          data-experience="{{ project['体験・交流タグ'] | escape }}"
-
-          data-format="{{ project['企画形式タグ'] | escape }}"
-        >
-
-
-          <!-- DB_ID -->
-
-          <td class="col-id">
-
-            {{ project['DB_ID'] }}
-
-          </td>
-
-
-
-          <!-- 年度 -->
-
-          <td class="col-year">
-
-            {{ project['年度'] }}
-
-          </td>
-
-
-
-          <!-- タイトル -->
-
-          <td class="col-title">
-
-            {{ project['整理版タイトル'] }}
-
-
-            <details>
-
-              <summary>
-                詳細を見る
-              </summary>
-
-
-              <div class="detail-box">
-
-
-                <div class="detail-row">
-
-                  <div class="detail-label">
-                    公開時期
-                  </div>
-
-                  <div class="detail-value">
-                    {{ project['公開時期'] }}
-                  </div>
-
-                </div>
-
-
-
-                <div class="detail-row">
-
-                  <div class="detail-label">
-                    地域資源
-                  </div>
-
-                  <div class="detail-value">
-                    {{ project['地域資源タグ'] }}
-                  </div>
-
-                </div>
-
-
-
-                <div class="detail-row">
-
-                  <div class="detail-label">
-                    対象者
-                  </div>
-
-                  <div class="detail-value">
-                    {{ project['対象者タグ'] }}
-                  </div>
-
-                </div>
-
-
-
-                <div class="detail-row">
-
-                  <div class="detail-label">
-                    価値
-                  </div>
-
-                  <div class="detail-value">
-                    {{ project['価値タグ'] }}
-                  </div>
-
-                </div>
-
-
-
-                <div class="detail-row">
-
-                  <div class="detail-label">
-                    体験・交流
-                  </div>
-
-                  <div class="detail-value">
-                    {{ project['体験・交流タグ'] }}
-                  </div>
-
-                </div>
-
-
-
-                <div class="detail-row">
-
-                  <div class="detail-label">
-                    企画形式
-                  </div>
-
-                  <div class="detail-value">
-                    {{ project['企画形式タグ'] }}
-                  </div>
-
-                </div>
-
-
-
-                <div class="detail-row">
-
-                  <div class="detail-label">
-                    URL確認
-                  </div>
-
-                  <div class="detail-value">
-                    {{ project['URL確認状況'] }}
-                  </div>
-
-                </div>
-
-
-
-                {% if project['備考']
-                   and project['備考'] != "" %}
-
-                <div class="detail-row">
-
-                  <div class="detail-label">
-                    備考
-                  </div>
-
-                  <div class="detail-value">
-                    {{ project['備考'] }}
-                  </div>
-
-                </div>
-
-                {% endif %}
-
-
-              </div>
-
-
-            </details>
-
-
-          </td>
-
-
-
-          <!-- 概要 -->
-
-          <td class="col-summary">
-
-            {{ project['概要'] }}
-
-          </td>
-
-
-
-          <!-- 元記事 -->
-
-          <td class="col-source">
-
-
-            {% if project['元記事URL']
-               and project['元記事URL'] != "" %}
-
-
-              <a
-                class="article-link"
-                href="{{ project['元記事URL'] }}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                記事を開く
-              </a>
-
-
-            {% else %}
-
-
-              <span class="unconfirmed">
-                未確認
-              </span>
-
-
-            {% endif %}
-
-
-          </td>
-
-
-        </tr>
-
-
-      {% endfor %}
-
-
-      </tbody>
-
-    </table>
-
-
-    <div id="noResult">
-
-      条件に一致する企画はありません。
-
-    </div>
-
-
-  </div>
+<select id="yearFilter">
+<option value="">すべて</option>
+</select>
 
 </div>
+
+
+<div class="filter">
+
+<label for="resourceFilter">
+地域資源
+</label>
+
+<select id="resourceFilter">
+<option value="">すべて</option>
+</select>
+
+</div>
+
+
+<div class="filter">
+
+<label for="targetFilter">
+対象者
+</label>
+
+<select id="targetFilter">
+<option value="">すべて</option>
+</select>
+
+</div>
+
+
+<div class="filter">
+
+<label for="valueFilter">
+価値
+</label>
+
+<select id="valueFilter">
+<option value="">すべて</option>
+</select>
+
+</div>
+
+
+<div class="filter">
+
+<label for="experienceFilter">
+体験・交流
+</label>
+
+<select id="experienceFilter">
+<option value="">すべて</option>
+</select>
+
+</div>
+
+
+<div class="filter">
+
+<label for="formatFilter">
+企画形式
+</label>
+
+<select id="formatFilter">
+<option value="">すべて</option>
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="search-footer">
+
+<div id="resultCount">
+読み込み中…
+</div>
+
+<button
+  id="clearButton"
+  type="button"
+>
+条件をクリア
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<main class="database">
+
+<div class="table-container">
+
+
+<div id="loading">
+データを読み込んでいます…
+</div>
+
+
+<div
+  id="error"
+  class="hidden"
+>
+CSVデータを読み込めませんでした。
+</div>
+
+
+<table
+  id="databaseTable"
+  class="hidden"
+>
+
+<thead>
+
+<tr>
+
+<th>DB_ID</th>
+
+<th>年度</th>
+
+<th>記事・企画タイトル</th>
+
+<th>公開時期</th>
+
+<th>概要</th>
+
+<th>元記事</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="tableBody">
+</tbody>
+
+</table>
+
+
+<div
+  id="noResults"
+  class="hidden"
+>
+条件に一致する企画はありません。
+</div>
+
+
+</div>
+
+</main>
 
 
 
 <script>
 
-  /* =========================
-     DOM取得
-     ========================= */
+/* =====================================================
+   設定
+   ===================================================== */
 
-  const searchBox =
-    document.getElementById("searchBox");
+const CSV_URL =
+  "./data/projects.csv";
 
-  const yearFilter =
-    document.getElementById("yearFilter");
 
-  const resourceFilter =
-    document.getElementById("resourceFilter");
-
-  const targetFilter =
-    document.getElementById("targetFilter");
-
-  const valueFilter =
-    document.getElementById("valueFilter");
-
-  const experienceFilter =
-    document.getElementById("experienceFilter");
-
-  const formatFilter =
-    document.getElementById("formatFilter");
-
-  const clearFilters =
-    document.getElementById("clearFilters");
-
-  const resultInfo =
-    document.getElementById("resultInfo");
-
-  const noResult =
-    document.getElementById("noResult");
-
-  const rows =
-    document.querySelectorAll(".db-row");
+let allProjects = [];
 
 
 
-  /* =========================
-     タグ分割
-     「 ; 」と「；」の両方に対応
-     ========================= */
+/* =====================================================
+   CSV解析
+   ダブルクォート内のカンマ・改行にも対応
+   ===================================================== */
 
-  function splitTags(text) {
+function parseCSV(text) {
 
-    if (!text) {
-      return [];
-    }
+  const rows = [];
 
-    return text
-      .split(/[;；]/)
-      .map(tag => tag.trim())
-      .filter(tag =>
-        tag !== "" &&
-        tag !== "記載なし"
-      );
+  let row = [];
+  let field = "";
 
-  }
+  let insideQuotes = false;
 
 
+  for (
+    let i = 0;
+    i < text.length;
+    i++
+  ) {
 
-  /* =========================
-     年度選択肢を自動作成
-     ========================= */
+    const char = text[i];
 
-  function createYearOptions() {
 
-    const years =
-      new Set();
+    if (char === '"') {
 
-    rows.forEach(row => {
+      if (
+        insideQuotes &&
+        text[i + 1] === '"'
+      ) {
 
-      const year =
-        row.dataset.year.trim();
+        field += '"';
+        i++;
 
-      if (year) {
-        years.add(year);
+      } else {
+
+        insideQuotes =
+          !insideQuotes;
+
       }
 
-    });
-
-
-    [...years]
-
-      .sort((a, b) =>
-        Number(b) - Number(a)
-      )
-
-      .forEach(year => {
-
-        const option =
-          document.createElement("option");
-
-        option.value =
-          year;
-
-        option.textContent =
-          year + "年度";
-
-        yearFilter.appendChild(option);
-
-      });
-
-  }
-
-
-
-  /* =========================
-     タグ選択肢を自動作成
-     ========================= */
-
-  function createTagOptions(
-    selectElement,
-    dataKey
-  ) {
-
-    const tags =
-      new Set();
-
-
-    rows.forEach(row => {
-
-      const values =
-        splitTags(
-          row.dataset[dataKey]
-        );
-
-
-      values.forEach(tag => {
-
-        tags.add(tag);
-
-      });
-
-    });
-
-
-    [...tags]
-
-      .sort((a, b) =>
-        a.localeCompare(
-          b,
-          "ja"
-        )
-      )
-
-      .forEach(tag => {
-
-        const option =
-          document.createElement("option");
-
-        option.value =
-          tag;
-
-        option.textContent =
-          tag;
-
-        selectElement.appendChild(
-          option
-        );
-
-      });
-
-  }
-
-
-
-  /* =========================
-     選択タグを含むか
-     ========================= */
-
-  function hasSelectedTag(
-    row,
-    dataKey,
-    selected
-  ) {
-
-    if (!selected) {
-      return true;
     }
 
+    else if (
+      char === "," &&
+      !insideQuotes
+    ) {
 
-    const tags =
-      splitTags(
-        row.dataset[dataKey]
+      row.push(field);
+      field = "";
+
+    }
+
+    else if (
+      (
+        char === "\n" ||
+        char === "\r"
+      ) &&
+      !insideQuotes
+    ) {
+
+      if (
+        char === "\r" &&
+        text[i + 1] === "\n"
+      ) {
+        i++;
+      }
+
+
+      row.push(field);
+
+      if (
+        row.some(
+          value =>
+            value.trim() !== ""
+        )
+      ) {
+        rows.push(row);
+      }
+
+      row = [];
+      field = "";
+
+    }
+
+    else {
+
+      field += char;
+
+    }
+
+  }
+
+
+  row.push(field);
+
+  if (
+    row.some(
+      value =>
+        value.trim() !== ""
+    )
+  ) {
+    rows.push(row);
+  }
+
+
+  if (rows.length === 0) {
+    return [];
+  }
+
+
+  const headers =
+    rows[0].map(
+      header =>
+        header
+          .replace(/^\uFEFF/, "")
+          .trim()
+    );
+
+
+  return rows
+    .slice(1)
+    .map(values => {
+
+      const object = {};
+
+      headers.forEach(
+        (header, index) => {
+
+          object[header] =
+            values[index]
+              ? values[index].trim()
+              : "";
+
+        }
+      );
+
+      return object;
+
+    });
+
+}
+
+
+
+/* =====================================================
+   HTML要素生成
+   ===================================================== */
+
+function createTextElement(
+  tag,
+  text,
+  className
+) {
+
+  const element =
+    document.createElement(tag);
+
+  element.textContent =
+    text || "";
+
+  if (className) {
+    element.className =
+      className;
+  }
+
+  return element;
+
+}
+
+
+
+/* =====================================================
+   詳細情報
+   ===================================================== */
+
+function addDetail(
+  container,
+  label,
+  value
+) {
+
+  if (
+    !value ||
+    value === "記載なし"
+  ) {
+    return;
+  }
+
+
+  const item =
+    document.createElement("div");
+
+  item.className =
+    "detail-item";
+
+
+  const labelElement =
+    document.createElement("span");
+
+  labelElement.className =
+    "detail-label";
+
+  labelElement.textContent =
+    label + "：";
+
+
+  item.appendChild(
+    labelElement
+  );
+
+
+  item.appendChild(
+    document.createTextNode(value)
+  );
+
+
+  container.appendChild(item);
+
+}
+
+
+
+/* =====================================================
+   1行生成
+   ===================================================== */
+
+function createRow(project) {
+
+  const tr =
+    document.createElement("tr");
+
+
+  /* DB_ID */
+
+  tr.appendChild(
+    createTextElement(
+      "td",
+      project["DB_ID"],
+      "id-cell"
+    )
+  );
+
+
+  /* 年度 */
+
+  tr.appendChild(
+    createTextElement(
+      "td",
+      project["年度"],
+      "year-cell"
+    )
+  );
+
+
+  /* タイトル */
+
+  const titleCell =
+    document.createElement("td");
+
+  titleCell.className =
+    "title-cell";
+
+
+  const title =
+    document.createElement("div");
+
+  title.textContent =
+    project["整理版タイトル"] || "";
+
+  titleCell.appendChild(title);
+
+
+
+  const details =
+    document.createElement("details");
+
+
+  const summary =
+    document.createElement("summary");
+
+  summary.textContent =
+    "詳細を見る";
+
+
+  const detailBox =
+    document.createElement("div");
+
+  detailBox.className =
+    "detail-box";
+
+
+  addDetail(
+    detailBox,
+    "地域資源",
+    project["地域資源タグ"]
+  );
+
+  addDetail(
+    detailBox,
+    "対象者",
+    project["対象者タグ"]
+  );
+
+  addDetail(
+    detailBox,
+    "価値",
+    project["価値タグ"]
+  );
+
+  addDetail(
+    detailBox,
+    "体験・交流",
+    project["体験・交流タグ"]
+  );
+
+  addDetail(
+    detailBox,
+    "企画形式",
+    project["企画形式タグ"]
+  );
+
+  addDetail(
+    detailBox,
+    "URL確認",
+    project["URL確認状況"]
+  );
+
+  addDetail(
+    detailBox,
+    "備考",
+    project["備考"]
+  );
+
+
+  details.appendChild(summary);
+  details.appendChild(detailBox);
+
+  titleCell.appendChild(details);
+
+  tr.appendChild(titleCell);
+
+
+
+  /* 公開時期 */
+
+  tr.appendChild(
+    createTextElement(
+      "td",
+      project["公開時期"],
+      "date-cell"
+    )
+  );
+
+
+
+  /* 概要 */
+
+  tr.appendChild(
+    createTextElement(
+      "td",
+      project["概要"],
+      "summary-cell"
+    )
+  );
+
+
+
+  /* 元記事 */
+
+  const sourceCell =
+    document.createElement("td");
+
+  sourceCell.className =
+    "source-cell";
+
+
+  if (
+    project["元記事URL"]
+  ) {
+
+    const link =
+      document.createElement("a");
+
+    link.href =
+      project["元記事URL"];
+
+    link.target =
+      "_blank";
+
+    link.rel =
+      "noopener noreferrer";
+
+    link.className =
+      "article-link";
+
+    link.textContent =
+      "記事を開く";
+
+
+    sourceCell.appendChild(link);
+
+  } else {
+
+    const text =
+      document.createElement("span");
+
+    text.className =
+      "unconfirmed";
+
+    text.textContent =
+      "未確認";
+
+    sourceCell.appendChild(text);
+
+  }
+
+
+  tr.appendChild(sourceCell);
+
+
+  return tr;
+
+}
+
+
+
+/* =====================================================
+   タグ分割
+   ===================================================== */
+
+function splitTags(value) {
+
+  if (!value) {
+    return [];
+  }
+
+
+  return value
+
+    .split(/[;；]/)
+
+    .map(
+      item =>
+        item.trim()
+    )
+
+    .filter(
+      item =>
+        item &&
+        item !== "記載なし"
+    );
+
+}
+
+
+
+/* =====================================================
+   フィルター選択肢生成
+   ===================================================== */
+
+function setOptions(
+  select,
+  values,
+  suffix = ""
+) {
+
+  values
+    .forEach(value => {
+
+      const option =
+        document.createElement("option");
+
+      option.value =
+        value;
+
+      option.textContent =
+        value + suffix;
+
+      select.appendChild(option);
+
+    });
+
+}
+
+
+
+function createFilters() {
+
+  const years =
+    [...new Set(
+      allProjects
+        .map(
+          project =>
+            project["年度"]
+        )
+        .filter(Boolean)
+    )]
+    .sort(
+      (a, b) =>
+        Number(b) - Number(a)
+    );
+
+
+  setOptions(
+    document.getElementById(
+      "yearFilter"
+    ),
+    years,
+    "年度"
+  );
+
+
+
+  const mappings = [
+
+    [
+      "resourceFilter",
+      "地域資源タグ"
+    ],
+
+    [
+      "targetFilter",
+      "対象者タグ"
+    ],
+
+    [
+      "valueFilter",
+      "価値タグ"
+    ],
+
+    [
+      "experienceFilter",
+      "体験・交流タグ"
+    ],
+
+    [
+      "formatFilter",
+      "企画形式タグ"
+    ]
+
+  ];
+
+
+  mappings.forEach(
+    ([selectId, field]) => {
+
+      const tags =
+        new Set();
+
+
+      allProjects.forEach(
+        project => {
+
+          splitTags(
+            project[field]
+          ).forEach(
+            tag =>
+              tags.add(tag)
+          );
+
+        }
       );
 
 
-    return tags.includes(
-      selected
-    );
+      const sorted =
+        [...tags].sort(
+          (a, b) =>
+            a.localeCompare(
+              b,
+              "ja"
+            )
+        );
 
+
+      setOptions(
+        document.getElementById(
+          selectId
+        ),
+        sorted
+      );
+
+    }
+  );
+
+}
+
+
+
+/* =====================================================
+   絞り込み
+   ===================================================== */
+
+function hasTag(
+  value,
+  selected
+) {
+
+  if (!selected) {
+    return true;
   }
 
+  return splitTags(value)
+    .includes(selected);
 
-
-  /* =========================
-     絞り込み処理
-     ========================= */
-
-  function filterRows() {
-
-
-    const keyword =
-      searchBox.value
-        .trim()
-        .toLowerCase();
-
-
-    const selectedYear =
-      yearFilter.value;
-
-
-    let visibleCount = 0;
+}
 
 
 
-    rows.forEach(row => {
+function filterProjects() {
+
+  const keyword =
+    document
+      .getElementById("keyword")
+      .value
+      .trim()
+      .toLowerCase();
 
 
-      const rowText =
-        row.textContent
+  const year =
+    document
+      .getElementById("yearFilter")
+      .value;
+
+
+  const resource =
+    document
+      .getElementById("resourceFilter")
+      .value;
+
+
+  const target =
+    document
+      .getElementById("targetFilter")
+      .value;
+
+
+  const value =
+    document
+      .getElementById("valueFilter")
+      .value;
+
+
+  const experience =
+    document
+      .getElementById("experienceFilter")
+      .value;
+
+
+  const format =
+    document
+      .getElementById("formatFilter")
+      .value;
+
+
+
+  return allProjects.filter(
+    project => {
+
+
+      const searchText =
+        Object
+          .values(project)
+          .join(" ")
           .toLowerCase();
 
 
       const keywordOK =
-        keyword === "" ||
-        rowText.includes(
-          keyword
-        );
+        !keyword ||
+        searchText.includes(keyword);
 
 
       const yearOK =
-        selectedYear === "" ||
-        row.dataset.year ===
-          selectedYear;
+        !year ||
+        project["年度"] === year;
 
 
-      const resourceOK =
-        hasSelectedTag(
-          row,
-          "resource",
-          resourceFilter.value
-        );
-
-
-      const targetOK =
-        hasSelectedTag(
-          row,
-          "target",
-          targetFilter.value
-        );
-
-
-      const valueOK =
-        hasSelectedTag(
-          row,
-          "value",
-          valueFilter.value
-        );
-
-
-      const experienceOK =
-        hasSelectedTag(
-          row,
-          "experience",
-          experienceFilter.value
-        );
-
-
-      const formatOK =
-        hasSelectedTag(
-          row,
-          "format",
-          formatFilter.value
-        );
-
-
-      const visible =
+      return (
         keywordOK &&
         yearOK &&
-        resourceOK &&
-        targetOK &&
-        valueOK &&
-        experienceOK &&
-        formatOK;
 
+        hasTag(
+          project["地域資源タグ"],
+          resource
+        ) &&
 
+        hasTag(
+          project["対象者タグ"],
+          target
+        ) &&
 
-      if (visible) {
+        hasTag(
+          project["価値タグ"],
+          value
+        ) &&
 
-        row.classList.remove(
-          "hidden"
-        );
+        hasTag(
+          project["体験・交流タグ"],
+          experience
+        ) &&
 
-        visibleCount++;
+        hasTag(
+          project["企画形式タグ"],
+          format
+        )
+      );
 
-      } else {
-
-        row.classList.add(
-          "hidden"
-        );
-
-      }
-
-    });
-
-
-
-    resultInfo.textContent =
-      "表示件数：" +
-      visibleCount +
-      "件";
-
-
-    noResult.style.display =
-      visibleCount === 0
-        ? "block"
-        : "none";
-
-  }
-
-
-
-  /* =========================
-     初期化
-     ========================= */
-
-  createYearOptions();
-
-  createTagOptions(
-    resourceFilter,
-    "resource"
+    }
   );
 
-  createTagOptions(
-    targetFilter,
-    "target"
-  );
-
-  createTagOptions(
-    valueFilter,
-    "value"
-  );
-
-  createTagOptions(
-    experienceFilter,
-    "experience"
-  );
-
-  createTagOptions(
-    formatFilter,
-    "format"
-  );
+}
 
 
 
-  /* =========================
-     イベント
-     ========================= */
+/* =====================================================
+   表表示
+   ===================================================== */
 
-  searchBox.addEventListener(
-    "input",
-    filterRows
-  );
+function renderTable() {
+
+  const projects =
+    filterProjects();
 
 
-  [
-    yearFilter,
-    resourceFilter,
-    targetFilter,
-    valueFilter,
-    experienceFilter,
-    formatFilter
-
-  ].forEach(select => {
-
-    select.addEventListener(
-      "change",
-      filterRows
+  const tbody =
+    document.getElementById(
+      "tableBody"
     );
 
-  });
+
+  tbody.replaceChildren();
 
 
+  projects.forEach(
+    project => {
 
-  /* =========================
-     条件クリア
-     ========================= */
-
-  clearFilters.addEventListener(
-    "click",
-    function () {
-
-      searchBox.value = "";
-
-      yearFilter.value = "";
-
-      resourceFilter.value = "";
-
-      targetFilter.value = "";
-
-      valueFilter.value = "";
-
-      experienceFilter.value = "";
-
-      formatFilter.value = "";
-
-      filterRows();
+      tbody.appendChild(
+        createRow(project)
+      );
 
     }
   );
 
 
+  document
+    .getElementById(
+      "resultCount"
+    )
+    .textContent =
+      "表示件数：" +
+      projects.length +
+      "件";
 
-  /* 初回表示 */
 
-  filterRows();
+  document
+    .getElementById(
+      "noResults"
+    )
+    .classList
+    .toggle(
+      "hidden",
+      projects.length !== 0
+    );
+
+}
+
+
+
+/* =====================================================
+   条件クリア
+   ===================================================== */
+
+function clearFilters() {
+
+  document
+    .getElementById(
+      "keyword"
+    )
+    .value = "";
+
+
+  [
+    "yearFilter",
+    "resourceFilter",
+    "targetFilter",
+    "valueFilter",
+    "experienceFilter",
+    "formatFilter"
+  ]
+
+  .forEach(id => {
+
+    document
+      .getElementById(id)
+      .value = "";
+
+  });
+
+
+  renderTable();
+
+}
+
+
+
+/* =====================================================
+   CSV読込
+   ===================================================== */
+
+async function loadDatabase() {
+
+  try {
+
+    const response =
+      await fetch(
+        CSV_URL,
+        {
+          cache: "no-store"
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "CSV fetch failed"
+      );
+
+    }
+
+
+    const text =
+      await response.text();
+
+
+    allProjects =
+      parseCSV(text);
+
+
+
+    document
+      .getElementById(
+        "totalCount"
+      )
+      .textContent =
+        allProjects.length;
+
+
+
+    createFilters();
+
+
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .classList
+      .add("hidden");
+
+
+    document
+      .getElementById(
+        "databaseTable"
+      )
+      .classList
+      .remove("hidden");
+
+
+    renderTable();
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .classList
+      .add("hidden");
+
+
+    document
+      .getElementById(
+        "error"
+      )
+      .classList
+      .remove("hidden");
+
+
+    document
+      .getElementById(
+        "resultCount"
+      )
+      .textContent =
+        "データを読み込めませんでした。";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   イベント
+   ===================================================== */
+
+document
+  .getElementById(
+    "keyword"
+  )
+  .addEventListener(
+    "input",
+    renderTable
+  );
+
+
+[
+  "yearFilter",
+  "resourceFilter",
+  "targetFilter",
+  "valueFilter",
+  "experienceFilter",
+  "formatFilter"
+]
+
+.forEach(id => {
+
+  document
+    .getElementById(id)
+    .addEventListener(
+      "change",
+      renderTable
+    );
+
+});
+
+
+document
+  .getElementById(
+    "clearButton"
+  )
+  .addEventListener(
+    "click",
+    clearFilters
+  );
+
+
+
+loadDatabase();
 
 </script>
 
